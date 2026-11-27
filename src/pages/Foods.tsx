@@ -14,18 +14,20 @@ export default function Foods() {
   const [q, setQ] = useState('');
   const [cat, setCat] = useState('');
   const [prep, setPrep] = useState('');
+  const [veg, setVeg] = useState(false);
   const [tab, setTab] = useState<'all' | 'fav' | 'mine'>('all');
   const [detail, setDetail] = useState<FoodItem | null>(null);
   const [draft, setDraft] = useState<FoodDraft | null>(null);
   const [limit, setLimit] = useState(60);
 
   const results = useMemo(() => {
-    let list = foodIndex.search(q, { category: cat || undefined, prep: prep || undefined, limit: 1000 });
+    let list = foodIndex.search(q, { category: cat || undefined, prep: prep || undefined, vegOnly: veg, limit: 1000 });
     if (tab === 'fav') list = list.filter((f) => favorites.has(f.food_id));
     if (tab === 'mine') list = list.filter((f) => f.owner_id);
     return list;
-  }, [foodIndex, q, cat, prep, tab, favorites]);
+  }, [foodIndex, q, cat, prep, veg, tab, favorites]);
   const globalCount = foods.filter((f) => !f.owner_id).length;
+  const verifiedCount = foods.filter((f) => !f.owner_id && f.verification_status === 'VERIFIED').length;
   const catName = (id: string) => { const c = categories.find((x) => x.id === id); return c ? (lang === 'en' ? c.name_en : c.name_vi) : id; };
 
   const saveDraft = async () => {
@@ -44,7 +46,7 @@ export default function Foods() {
       <PageHeader title={t('nav_foods')} subtitle={`${fmt(globalCount)} món · ${categories.length} nhóm`}
         actions={<button className="btn-primary" onClick={() => setDraft(emptyFood(categories[0]?.id ?? 'home_meals'))}><Plus size={16} />{t('create_custom_food')}</button>} />
 
-      <div className="mb-4 flex items-start gap-2 rounded-xl bg-amber-50 px-3 py-2 text-xs text-amber-800"><Info size={14} className="mt-0.5 shrink-0" />{t('db_honesty', { n: globalCount })}</div>
+      <div className="mb-4 flex items-start gap-2 rounded-xl bg-amber-50 px-3 py-2 text-xs text-amber-800"><Info size={14} className="mt-0.5 shrink-0" />{t('db_honesty', { n: globalCount, v: verifiedCount })}</div>
 
       <div className="card mb-4 space-y-3 p-4">
         <div className="relative">
@@ -61,6 +63,7 @@ export default function Foods() {
             <option value="">{t('preparation')}: {t('all')}</option>
             {PREPS.map((p) => <option key={p} value={p}>{t(`prep_${p}` as 'prep_raw')}</option>)}
           </select>
+          <button type="button" aria-pressed={veg} onClick={() => setVeg((v) => !v)} className={cx('chip cursor-pointer border', veg ? 'border-brand-500 bg-brand-50 text-brand-700' : 'border-ink-100 text-ink-500')}>🌱 {t('veg_only')}</button>
           <span className="ml-auto text-xs text-ink-400">{results.length} kết quả</span>
         </div>
       </div>

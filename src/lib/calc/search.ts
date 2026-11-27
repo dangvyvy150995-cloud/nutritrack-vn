@@ -12,6 +12,11 @@ export function normalizeVi(s: string): string {
     .trim();
 }
 
+/** Plant-only food: tagged "chay" or in the vegetarian category. */
+export function isVegetarian(f: FoodItem): boolean {
+  return f.category === 'vegetarian' || f.search_keywords.includes('chay');
+}
+
 interface Indexed { food: FoodItem; vi: string; en: string; alt: string }
 
 export class FoodSearchIndex {
@@ -25,13 +30,14 @@ export class FoodSearchIndex {
     }));
   }
 
-  search(query: string, opts: { category?: string; prep?: string; limit?: number } = {}): FoodItem[] {
+  search(query: string, opts: { category?: string; prep?: string; vegOnly?: boolean; limit?: number } = {}): FoodItem[] {
     const q = normalizeVi(query);
     const tokens = q.split(' ').filter(Boolean);
     const scored: { f: FoodItem; s: number }[] = [];
     for (const it of this.items) {
       if (opts.category && it.food.category !== opts.category) continue;
       if (opts.prep && it.food.preparation_method !== opts.prep) continue;
+      if (opts.vegOnly && !isVegetarian(it.food)) continue;
       if (!tokens.length) { scored.push({ f: it.food, s: 0 }); continue; }
       const s = score(it, q, tokens);
       if (s > 0) scored.push({ f: it.food, s });

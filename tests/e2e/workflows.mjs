@@ -94,14 +94,14 @@ async function addFood(meal, query, grams) {
   await saved();
 }
 await addFood('Bữa sáng', 'trung luoc', 100);     // 155 kcal, P12.6 C1.1 F10.6
-await addFood('Bữa trưa', 'com trang', 150);      // 195 kcal, P4.05 C42.3 F0.45 Fib0.6
+await addFood('Bữa trưa', 'com trang', 150);      // 195 kcal, P4.035 C42.26 F0.42 Fib0.6 (USDA 20045)
 await addFood('Bữa tối', 'uc ga chin', 200);      // 330 kcal, P62 F7.2
 await addFood('Bữa phụ', 'chuoi', 100);           // 89 kcal, P1.1 C22.8 F0.3 Fib2.6
 const totalText = await page.locator('.card').first().innerText();
 const kcal = Number(totalText.match(/Năng lượng\s*([\d.,]+)/i)[1].replace(/[.,]/g, ''));
 ok('4. foods added to breakfast, lunch, dinner and snacks', (await page.locator('main li').count()) >= 4);
 ok('5. calorie total exact: 155+195+330+89 = 769', kcal === 769, String(kcal));
-ok('6. protein total exact: 12.6+4.05+62+1.1 = 79.75 → 79.8', /Đạm\s*79[.,]8/i.test(totalText), totalText.split('\n').slice(0, 6).join(' | '));
+ok('6. protein total exact: 12.6+4.035+62+1.1 = 79.735 → 79.7', /Đạm\s*79[.,]7/i.test(totalText), totalText.split('\n').slice(0, 6).join(' | '));
 ok('6. fiber total exact: 0.6+2.6 = 3.2', /Chất xơ\s*3[.,]2/i.test(totalText));
 
 // "tom hap" search works without diacritics
@@ -271,7 +271,7 @@ await page.goto(BASE + '/admin');
 ok('17. admin can open admin dashboard', await visible(page.getByRole('heading', { name: /Quản trị cơ sở dữ liệu/ })));
 await visible(page.getByText('food_id', { exact: false }).or(page.locator('code')));
 const adminText = await page.locator('main').innerText();
-ok('admin shows 503 ESTIMATED, 0 VERIFIED', /Ước tính\s*503/.test(adminText) && /Đã xác minh\s*0/.test(adminText));
+ok('admin shows 502 ESTIMATED, 26 VERIFIED', /Ước tính\s*502/.test(adminText) && /Đã xác minh\s*26/.test(adminText));
 await page.getByRole('button', { name: 'Đánh dấu đã xác minh' }).first().click();
 await page.getByLabel('Nguồn dữ liệu').fill('');
 await page.getByRole('button', { name: /^Lưu$/ }).click();
