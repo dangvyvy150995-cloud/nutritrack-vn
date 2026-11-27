@@ -61,6 +61,7 @@ export function NumberInput({ label, value, onChange, hint, error, step = 'any',
     <Field label={label} hint={hint} error={error} htmlFor={id}>
       <input id={id} type="number" inputMode="decimal" className={cx('input tabular', error && 'border-red-300')} step={step} min={min} max={max}
         placeholder={placeholder} required={required} disabled={disabled} aria-invalid={!!error}
+        onFocus={(e) => e.target.select()}
         value={value ?? ''} onChange={(e) => onChange(e.target.value === '' ? null : Number(e.target.value))} />
     </Field>
   );
@@ -79,15 +80,23 @@ export function SelectInput({ label, options, hint, ...rest }: SelectHTMLAttribu
 
 export function Modal({ open, onClose, title, children, footer, wide }: { open: boolean; onClose: () => void; title: ReactNode; children: ReactNode; footer?: ReactNode; wide?: boolean }) {
   const ref = useRef<HTMLDivElement>(null);
+  // Callers usually pass an inline onClose, which is a new function on every render. Keep it in a ref so the
+  // effect below runs only when the modal opens; otherwise each keystroke re-ran it and stole focus from the field.
+  const onCloseRef = useRef(onClose);
+  onCloseRef.current = onClose;
   useEffect(() => {
     if (!open) return;
-    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose(); };
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') onCloseRef.current(); };
     document.addEventListener('keydown', onKey);
     const prev = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
-    setTimeout(() => ref.current?.querySelector<HTMLElement>('input,select,textarea,button')?.focus(), 30);
-    return () => { document.removeEventListener('keydown', onKey); document.body.style.overflow = prev; };
-  }, [open, onClose]);
+    const timer = setTimeout(() => {
+      const root = ref.current;
+      if (!root || root.contains(document.activeElement)) return;
+      (root.querySelector<HTMLElement>('input,select,textarea') ?? root.querySelector<HTMLElement>('button'))?.focus();
+    }, 30);
+    return () => { clearTimeout(timer); document.removeEventListener('keydown', onKey); document.body.style.overflow = prev; };
+  }, [open]);
   if (!open) return null;
   return (
     <div className="fixed inset-0 z-50 flex items-end justify-center bg-ink-900/40 p-0 sm:items-center sm:p-4" onMouseDown={(e) => { if (e.target === e.currentTarget) onClose(); }}>
