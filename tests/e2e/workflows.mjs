@@ -1,4 +1,7 @@
-// End-to-end workflow test (demo mode). Run: node tests/e2e/workflows.mjs [baseUrl]
+// End-to-end workflow test. Run: node tests/e2e/workflows.mjs [baseUrl]
+// Demo mode by default. LIVE=1 runs against a build connected to a real Supabase project:
+// it registers two fresh users (EMAIL_A/EMAIL_B or unique @example.com addresses; needs "Confirm email" off)
+// and skips the demo-only admin section.
 // Requires the app served (npm run build && npx vite preview --port 4173).
 import { createRequire } from 'node:module';
 const { chromium } = createRequire(import.meta.url)('playwright');
@@ -9,22 +12,46 @@ fs.mkdirSync(OUT, { recursive: true });
 const results = [];
 const ok = (name, cond, detail = '') => { results.push({ name, pass: !!cond, detail }); console.log(`${cond ? 'PASS' : 'FAIL'}  ${name}${detail ? ' — ' + detail : ''}`); };
 
-const browser = await chromium.launch();
+const LIVE = process.env.LIVE === '1';
+const stamp = Date.now().toString(36);
+const EMAIL_A = process.env.EMAIL_A || (LIVE ? `ntvn.e2e.a.${stamp}@example.com` : 'a@test.vn');
+const EMAIL_B = process.env.EMAIL_B || (LIVE ? `ntvn.e2e.b.${stamp}@example.com` : 'b@test.vn');
+const PASS_A = LIVE ? 'E2e-pass-A-2026' : 'password123';
+const PASS_B = LIVE ? 'E2e-pass-B-2026' : 'password456';
+const proxy = LIVE && process.env.HTTPS_PROXY ? { server: process.env.HTTPS_PROXY, bypass: 'localhost,127.0.0.1' } : undefined;
+const browser = await chromium.launch({ proxy });
 const ctx = await browser.newContext({ viewport: { width: 1360, height: 900 }, acceptDownloads: true });
 const page = await ctx.newPage();
 const errors = [];
 page.on('pageerror', (e) => errors.push(e.message));
 page.on('dialog', (d) => d.accept());
 const visible = (loc) => loc.first().waitFor({ timeout: 8000 }).then(() => true).catch(() => false);
+// Wait for the save toast and, in LIVE mode, for the write to Supabase and any refetch to finish.
+// (page.waitForLoadState('networkidle') can't be used: it resolves at once after the first page load.)
+let writes = 0, seenWrites = 0, pending = 0;
+const isApi = (r) => /supabase\.co\/(rest|auth)\//.test(r.url());
+page.on('request', (r) => { if (!isApi(r)) return; pending++; if (r.method() !== 'GET' && r.method() !== 'HEAD') writes++; });
+const done = (r) => { if (isApi(r)) pending--; };
+page.on('requestfinished', done); page.on('requestfailed', done);
+const saved = async () => {
+  await page.getByText('Đã lưu').first().waitFor();
+  if (!LIVE) return;
+  const t0 = Date.now();
+  while ((writes <= seenWrites || pending > 0) && Date.now() - t0 < 15000) await page.waitForTimeout(100);
+  seenWrites = writes;
+  await page.waitForTimeout(300);
+  while (pending > 0 && Date.now() - t0 < 15000) await page.waitForTimeout(100);
+};
 const num = async (sel) => Number((await page.locator(sel).first().innerText()).replace(/[^\d.,-]/g, '').replace(/,/g, ''));
 
 // 1. Registration
 await page.goto(BASE + '/register');
-ok('demo banner shown when Supabase not configured', await page.getByText('Chế độ demo').first().isVisible());
+if (LIVE) ok('no demo banner when Supabase is configured', (await page.getByText('Chế độ demo').count()) === 0);
+else ok('demo banner shown when Supabase not configured', await page.getByText('Chế độ demo').first().isVisible());
 await page.getByLabel('Họ và tên').fill('Nguyễn Văn A');
-await page.getByLabel('Email').fill('a@test.vn');
-await page.getByLabel('Mật khẩu', { exact: true }).fill('password123');
-await page.getByLabel('Xác nhận mật khẩu').fill('password123');
+await page.getByLabel('Email').fill(EMAIL_A);
+await page.getByLabel('Mật khẩu', { exact: true }).fill(PASS_A);
+await page.getByLabel('Xác nhận mật khẩu').fill(PASS_A);
 await page.getByRole('button', { name: 'Đăng ký' }).click();
 await page.waitForURL(BASE + '/');
 await page.getByRole('heading', { level: 1, name: /Tổng quan/ }).waitFor();
@@ -40,7 +67,7 @@ await page.getByLabel('Cân nặng (kg)').fill('75');
 await page.getByLabel('Mức độ vận động').selectOption('moderate');
 await page.getByLabel('Mục tiêu tập luyện').selectOption('fat_loss');
 await page.getByRole('button', { name: 'Lưu' }).first().click();
-await page.getByText('Đã lưu').first().waitFor();
+await saved();
 await page.reload();
 ok('3. profile edit persists after reload', (await page.getByLabel('Chiều cao (cm)').inputValue()) === '172');
 
@@ -52,7 +79,7 @@ const kcalTarget = Number(await page.getByLabel('Calo mục tiêu (kcal)').input
 ok('goals: Mifflin-St Jeor recommendation matches hand calculation (2210 kcal)', kcalTarget === 2210, String(kcalTarget));
 ok('goals: macros consistent message shown', await page.getByText('Đa lượng khớp với calo mục tiêu').isVisible());
 await page.getByRole('button', { name: 'Lưu' }).first().click();
-await page.getByText('Đã lưu').first().waitFor();
+await saved();
 
 // 4–6. Diary: add foods to all four meals and verify exact totals
 await page.goto(BASE + '/diary');
@@ -64,7 +91,7 @@ async function addFood(meal, query, grams) {
   await page.getByRole('button', { name: /^Khối lượng|^Thể tích/ }).click();
   await page.locator('#amt').fill(String(grams));
   await page.getByRole('button', { name: /^Thêm$/ }).click();
-  await page.getByText('Đã lưu').first().waitFor();
+  await saved();
 }
 await addFood('Bữa sáng', 'trung luoc', 100);     // 155 kcal, P12.6 C1.1 F10.6
 await addFood('Bữa trưa', 'com trang', 150);      // 195 kcal, P4.05 C42.3 F0.45 Fib0.6
@@ -94,7 +121,7 @@ const dinner = page.locator('section', { has: page.getByRole('heading', { name: 
 await dinner.getByRole('button', { name: 'Sửa' }).click();
 await page.locator('#amt').fill('100');
 await page.getByRole('button', { name: /^Lưu$/ }).click();
-await page.getByText('Đã lưu').first().waitFor();
+await saved();
 let t2 = await page.locator('.card').first().innerText();
 ok('8. edit entry: dinner 200 g → 100 g reduces total to 604', /Năng lượng\s*604/i.test(t2), t2.split('\n').slice(0, 3).join(' '));
 const snack = page.locator('section', { has: page.getByRole('heading', { name: /^Bữa phụ/ }) });
@@ -147,7 +174,7 @@ async function addMeasure(date, w, smm, bfm, pct, waist, hip) {
   await page.getByLabel('Vòng mông (cm)').fill(String(hip));
   const bmiText = await page.getByText(/^BMI:/).innerText();
   await page.getByRole('button', { name: /^Lưu$/ }).click();
-  await page.getByText('Đã lưu').first().waitFor();
+  await saved();
   return bmiText;
 }
 const today = await page.evaluate(() => new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Ho_Chi_Minh' }).format(new Date()));
@@ -190,7 +217,7 @@ ok('16. CSV export contains diary rows with kcal', csv.includes('date,meal,food,
 
 // 17. Admin permissions (regular user)
 await page.goto(BASE + '/admin');
-ok('17. regular user is denied admin page', await page.getByText('Chỉ quản trị viên').isVisible());
+ok('17. regular user is denied admin page', await visible(page.getByText('Chỉ quản trị viên')));
 ok('17. admin link hidden from regular user', !(await page.getByRole('link', { name: 'Quản trị' }).count()));
 
 // language switch
@@ -202,17 +229,17 @@ await page.getByRole('button', { name: 'VI' }).first().click();
 await page.getByRole('button', { name: 'Đăng xuất' }).first().click();
 await page.waitForURL(BASE + '/login');
 ok('2. logout returns to login', true);
-await page.getByLabel('Email').fill('a@test.vn');
+await page.getByLabel('Email').fill(EMAIL_A);
 await page.getByLabel('Mật khẩu').fill('wrongpass');
 await page.getByRole('button', { name: 'Đăng nhập', exact: true }).click();
-ok('2. wrong password rejected', await page.getByRole('alert').isVisible());
+ok('2. wrong password rejected', await visible(page.getByRole('alert')));
 
 // 13. Data isolation: second user
 await page.goto(BASE + '/register');
 await page.getByLabel('Họ và tên').fill('B');
-await page.getByLabel('Email').fill('b@test.vn');
-await page.getByLabel('Mật khẩu', { exact: true }).fill('password456');
-await page.getByLabel('Xác nhận mật khẩu').fill('password456');
+await page.getByLabel('Email').fill(EMAIL_B);
+await page.getByLabel('Mật khẩu', { exact: true }).fill(PASS_B);
+await page.getByLabel('Xác nhận mật khẩu').fill(PASS_B);
 await page.getByRole('button', { name: 'Đăng ký' }).click();
 await page.waitForURL(BASE + '/');
 await page.goto(BASE + '/diary');
@@ -225,8 +252,8 @@ ok('13. user B sees none of user A\'s recipes', await visible(page.getByText('Ch
 await page.getByRole('button', { name: 'Đăng xuất' }).first().click();
 
 // login back as A
-await page.getByLabel('Email').fill('a@test.vn');
-await page.getByLabel('Mật khẩu').fill('password123');
+await page.getByLabel('Email').fill(EMAIL_A);
+await page.getByLabel('Mật khẩu').fill(PASS_A);
 await page.getByRole('button', { name: 'Đăng nhập', exact: true }).click();
 await page.waitForURL(BASE + '/');
 await page.goto(BASE + '/diary');
@@ -235,6 +262,7 @@ ok('2. login works and A\'s data is intact', /Năng lượng\s*515/i.test(await 
 await page.getByRole('button', { name: 'Đăng xuất' }).first().click();
 
 // Admin (demo sample account) – full workflow incl. verification rule
+if (!LIVE) {
 await page.getByRole('button', { name: /Đăng nhập – Dữ liệu mẫu/ }).click();
 await page.getByRole('button', { name: 'Đăng nhập', exact: true }).click();
 await page.waitForURL(BASE + '/');
@@ -250,12 +278,14 @@ await page.getByRole('button', { name: /^Lưu$/ }).click();
 ok('admin cannot mark VERIFIED without a data source', await page.getByText('Cần nhập nguồn dữ liệu').first().isVisible());
 await page.keyboard.press('Escape');
 await page.screenshot({ path: `${OUT}/admin-desktop.png`, fullPage: false });
+}
 
 // 15. Mobile responsiveness
 const m = await browser.newContext({ ...{ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true } });
 const mp = await m.newPage();
 await mp.goto(BASE + '/login');
-await mp.getByRole('button', { name: /Đăng nhập – Dữ liệu mẫu/ }).click();
+if (LIVE) { await mp.getByLabel('Email').fill(EMAIL_A); await mp.getByLabel('Mật khẩu').fill(PASS_A); }
+else await mp.getByRole('button', { name: /Đăng nhập – Dữ liệu mẫu/ }).click();
 await mp.getByRole('button', { name: 'Đăng nhập', exact: true }).click();
 await mp.waitForURL(BASE + '/');
 await mp.waitForTimeout(500);

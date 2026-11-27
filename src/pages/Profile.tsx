@@ -7,10 +7,12 @@ import { ageOn } from '@/lib/calc/dates';
 export default function Profile() {
   const { t, profile, backend, setProfile, toast, today } = useApp();
   const [f, setF] = useState<UserProfile | null>(profile);
+  const [dirty, setDirty] = useState(false);
   const [pw, setPw] = useState({ a: '', b: '' });
-  useEffect(() => setF(profile), [profile]);
+  // Refresh the form from the server copy only while the user has no unsaved edits.
+  useEffect(() => { if (!dirty || !f || f.id !== profile?.id) { setF(profile); setDirty(false); } }, [profile]); // eslint-disable-line react-hooks/exhaustive-deps
   if (!f) return null;
-  const set = <K extends keyof UserProfile>(k: K, v: UserProfile[K]) => setF({ ...f, [k]: v });
+  const set = <K extends keyof UserProfile>(k: K, v: UserProfile[K]) => { setDirty(true); setF({ ...f, [k]: v }); };
 
   const save = async () => {
     if (!f.full_name.trim()) { toast(`${t('full_name')}: ${t('required')}`, 'error'); return; }
@@ -28,7 +30,7 @@ export default function Profile() {
             waist_cm: null, hip_cm: null, visceral_fat_level: null, total_body_water_l: null, device_bmr_kcal: null, segmental_lean: null, segmental_fat: null, device: null, notes: 'Từ hồ sơ / from profile' });
         }
       }
-      setProfile(saved); toast(t('saved'));
+      setDirty(false); setProfile(saved); toast(t('saved'));
     } catch (e) { toast((e as Error).message, 'error'); }
   };
   const changePw = async () => {

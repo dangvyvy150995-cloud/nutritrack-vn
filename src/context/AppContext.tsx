@@ -110,8 +110,11 @@ export function AppProvider({ children }: { children: ReactNode }) {
         toast((e as Error).message, 'error');
       } finally { if (alive) setReady(true); }
     };
-    backend.getUser().then(load);
-    const off = backend.onAuthChange((u) => { if ((u?.id ?? null) !== currentId) load(u); });
+    // Supabase fires INITIAL_SESSION/SIGNED_IN as well as resolving getUser(); load each user only once,
+    // otherwise a second profile fetch can land while a page is already being edited.
+    const loadIfChanged = (u: AuthUser | null) => { if (currentId === undefined || (u?.id ?? null) !== currentId) load(u); };
+    backend.getUser().then(loadIfChanged);
+    const off = backend.onAuthChange(loadIfChanged);
     return () => { alive = false; off(); };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
