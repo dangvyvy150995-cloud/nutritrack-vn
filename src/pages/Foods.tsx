@@ -1,9 +1,9 @@
 import { useMemo, useState } from 'react';
-import { Search, Star, Plus, Pencil, Trash2, Info } from 'lucide-react';
+import { Search, Star, Plus, Pencil, Trash2, Info, Loader2 } from 'lucide-react';
 import { useApp } from '@/context/AppContext';
 import { ConfirmButton, cx, fmt, Modal, PageHeader, Segmented, Spinner, StatusBadge } from '@/components/ui';
 import { MacroLine } from '@/components/FoodPicker';
-import { emptyFood, FoodForm, validateFoodDraft, type FoodDraft } from '@/components/FoodForm';
+import { emptyFood, FoodForm, foodSaveErrorKey, validateFoodDraft, type FoodDraft } from '@/components/FoodForm';
 import type { FoodItem, PreparationMethod } from '@/types';
 import { foodPer100 } from '@/lib/calc/nutrition';
 
@@ -17,7 +17,10 @@ export default function Foods() {
   const [veg, setVeg] = useState(false);
   const [tab, setTab] = useState<'all' | 'fav' | 'mine'>('all');
   const [detail, setDetail] = useState<FoodItem | null>(null);
-  const [draft, setDraft] = useState<FoodDraft | null>(null);
+  const [draft, setDraftState] = useState<FoodDraft | null>(null);
+  const [formError, setFormError] = useState<string | null>(null);
+  const [saving, setSaving] = useState(false);
+  const setDraft = (d: FoodDraft | null) => { setDraftState(d); setFormError(null); };
   const [limit, setLimit] = useState(60);
 
   const results = useMemo(() => {
@@ -31,14 +34,21 @@ export default function Foods() {
   const catName = (id: string) => { const c = categories.find((x) => x.id === id); return c ? (lang === 'en' ? c.name_en : c.name_vi) : id; };
 
   const saveDraft = async () => {
-    if (!draft) return;
+    if (!draft || saving) return;
     const err = validateFoodDraft(draft, false);
-    if (err) { toast(`${t('error_generic')} (${err})`, 'error'); return; }
+    if (err) { setFormError(t(err)); return; }
+    setSaving(true); setFormError(null);
     try {
       const { food_id, verification_status: _v, ...rest } = draft;
       await backend.saveCustomFood({ ...rest, food_id: food_id || undefined });
-      await reloadFoods(); setDraft(null); toast(t('saved'));
-    } catch (e) { toast((e as Error).message, 'error'); }
+      setDraft(null); toast(t('saved'));
+      await reloadFoods();
+    } catch (e) {
+      const msg = (e as Error).message;
+      const key = foodSaveErrorKey(msg);
+      const text = key ? t(key) : `${t('error_generic')} (${msg})`;
+      setFormError(text);
+    } finally { setSaving(false); }
   };
 
   return (
@@ -111,8 +121,15 @@ export default function Foods() {
         {detail && <FoodDetail f={detail} catName={catName(detail.category)} />}
       </Modal>
       <Modal open={!!draft} onClose={() => setDraft(null)} title={draft?.food_id ? t('edit') : t('create_custom_food')} wide
-        footer={<><button className="btn-secondary" onClick={() => setDraft(null)}>{t('cancel')}</button><button className="btn-primary" onClick={saveDraft}>{t('save')}</button></>}>
-        {draft && <FoodForm value={draft} onChange={setDraft} />}
+        footer={
+          <div className="flex w-full flex-col gap-2">
+            {formError && <div role="alert" data-testid="food-form-error" className="rounded-xl border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">{formError}</div>}
+            <div className="flex justify-end gap-2">
+              <button className="btn-secondary" onClick={() => setDraft(null)} disabled={saving}>{t('cancel')}</button>
+              <button className="btn-primary" onClick={saveDraft} disabled={saving} aria-busy={saving}>{saving ? <><Loader2 className="animate-spin" size={16} />{t('saving')}</> : t('save')}</button>
+            </div>
+          </div>}>
+        {draft && <FoodForm value={draft} onChange={(d) => { setDraftState(d); if (formError) setFormError(null); }} />}
       </Modal>
     </div>
   );

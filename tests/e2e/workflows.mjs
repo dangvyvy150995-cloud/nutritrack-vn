@@ -301,6 +301,26 @@ for (const p of ['/diary', '/progress', '/body', '/foods']) {
 await mp.goto(BASE + '/diary'); await mp.waitForTimeout(400);
 await mp.screenshot({ path: `${OUT}/diary-mobile.png`, fullPage: true });
 
+// 17. Custom food form: typing key by key keeps focus (a modal effect used to move focus to the close button
+// after the first keystroke), and per-serving numbers are converted to per 100 g.
+await mp.goto(BASE + '/foods'); await mp.waitForTimeout(600);
+await mp.getByRole('button', { name: 'Tạo món riêng' }).first().click();
+const fd = mp.locator('[role=dialog]');
+await fd.getByLabel('Tên tiếng Việt *').click(); await mp.keyboard.type('Cơm gà xối mỡ', { delay: 20 });
+await fd.getByLabel('Tên tiếng Anh').click(); await mp.keyboard.type('Fried chicken rice', { delay: 20 });
+ok('17. custom food: Vietnamese name typed key by key', (await fd.getByLabel('Tên tiếng Việt *').inputValue()) === 'Cơm gà xối mỡ');
+ok('17. custom food: English name typed key by key', (await fd.getByLabel('Tên tiếng Anh').inputValue()) === 'Fried chicken rice');
+await fd.getByLabel('Đạm (g)').click(); await mp.keyboard.type('30'); await fd.getByLabel('Tinh bột (g)').click(); await mp.keyboard.type('70');
+await fd.getByLabel('Chất béo (g)').click(); await mp.keyboard.type('20');
+await fd.getByRole('button', { name: 'Lưu' }).click();
+ok('17. custom food: per-plate numbers get a clear message', (await mp.getByTestId('food-form-error').innerText().catch(() => '')).includes('Cả khẩu phần'));
+await fd.getByRole('button', { name: 'Cả khẩu phần' }).click();
+await fd.getByLabel(/Khối lượng 1 khẩu phần/).fill('350');
+await fd.getByLabel(/^kcal/).fill('600'); await fd.getByLabel('Đạm (g)').fill('30'); await fd.getByLabel('Tinh bột (g)').fill('70'); await fd.getByLabel('Chất béo (g)').fill('20');
+ok('17. custom food: per-serving converted to per 100 g', (await mp.getByTestId('per100-preview').innerText()).includes('171.43 kcal'));
+await fd.getByRole('button', { name: 'Lưu' }).click();
+ok('17. custom food: saved', await mp.getByText('Đã lưu').first().waitFor({ timeout: 15000 }).then(() => true).catch(() => false));
+
 ok('no uncaught page errors', errors.length === 0, errors.join(' | '));
 await browser.close();
 const failed = results.filter((r) => !r.pass);

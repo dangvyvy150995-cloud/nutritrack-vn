@@ -40,7 +40,7 @@ export default function Admin() {
   const saveDraft = async () => {
     if (!draft) return;
     const err = validateFoodDraft(draft, true);
-    if (err) { toast(err === 'data_source' ? t('need_source') : `${t('error_generic')} (${err})`, 'error'); return; }
+    if (err) { toast(t(err), 'error'); return; }
     const id = draft.food_id.trim() || `food-${normalizeVi(draft.food_name_vi).replace(/\s+/g, '-').slice(0, 40)}-${Date.now().toString(36)}`;
     if (isNew && foods?.some((f) => f.food_id === id)) { toast(`ID "${id}" exists`, 'error'); return; }
     const now = new Date().toISOString();
