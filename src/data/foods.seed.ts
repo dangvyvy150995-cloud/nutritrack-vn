@@ -3,15 +3,20 @@
  *
  * DATA HONESTY NOTICE
  * -------------------
- * Every record in this file is marked ESTIMATED. Values are per 100 g of
- * edible food (per 100 ml for beverages) and were compiled as approximations;
- * none has yet been checked line-by-line against a specific record in the
- * Vietnamese National Food Composition Table (Viện Dinh dưỡng Quốc gia) or
- * USDA FoodData Central. Each record states its estimation basis in
- * `data_source`. Administrators should verify records against an identifiable
- * source and only then change the status to VERIFIED (Admin › Food database).
+ * Records in the rows below are ESTIMATED. Values are per 100 g of edible food
+ * (per 100 ml for beverages) and were compiled as approximations; they have
+ * not been checked line-by-line against the Vietnamese National Food
+ * Composition Table (Viện Dinh dưỡng Quốc gia). Each record states its
+ * estimation basis in `data_source`.
+ *
+ * Exceptions: the records listed in USDA_UPGRADES (./vegetarian.ts) take their
+ * values from a cited USDA SR Legacy record and are VERIFIED, and the
+ * vegetarian foods in ./vegetarian.ts carry their own per-record source.
+ * Administrators should verify any other record against an identifiable
+ * source before changing its status to VERIFIED (Admin › Food database).
  */
 import type { FoodCategory, FoodItem, PreparationMethod, RawOrCooked } from '@/types';
+import { EXISTING_VEGAN, REPLACES_EXISTING, USDA, USDA_UPGRADES, usdaSource, VEG_CATEGORY, VEG_TAG, VEG_TIMESTAMP, VEGETARIAN_FOODS } from './vegetarian';
 
 export const CATEGORIES: FoodCategory[] = [
   { id: 'rice_noodles', code: 'A', name_vi: 'Cơm, bún, phở & tinh bột', name_en: 'Rice, noodles & carbohydrates', sort_order: 1 },
@@ -29,6 +34,7 @@ export const CATEGORIES: FoodCategory[] = [
   { id: 'international', code: 'M', name_vi: 'Món quốc tế', name_en: 'International foods', sort_order: 13 },
   { id: 'processed', code: 'N', name_vi: 'Thực phẩm chế biến', name_en: 'Frozen & processed foods', sort_order: 14 },
   { id: 'nuts_dried', code: 'O', name_vi: 'Hạt & đồ khô', name_en: 'Nuts, seeds & dried foods', sort_order: 15 },
+  { ...VEG_CATEGORY },
 ];
 
 export const BASIS = {
@@ -676,6 +682,21 @@ function buildFoods(): FoodItem[] {
         servings,
       });
     }
+  }
+  // Records matched 1:1 to a USDA SR Legacy entry (see ./vegetarian.ts).
+  for (const f of out) {
+    const k = USDA_UPGRADES[f.food_id];
+    if (k) {
+      const u = USDA[k];
+      Object.assign(f, { calories_kcal: u.kcal, protein_g: u.p, carbs_g: u.c, fat_g: u.f, fiber_g: u.fib, data_source: usdaSource(k), verification_status: 'VERIFIED', updated_at: VEG_TIMESTAMP });
+    }
+    if (EXISTING_VEGAN.includes(f.food_id)) f.search_keywords = [...f.search_keywords, VEG_TAG];
+  }
+  for (const f of VEGETARIAN_FOODS) {
+    if (REPLACES_EXISTING.includes(f.food_id)) { out.splice(out.findIndex((x) => x.food_id === f.food_id), 1, f); continue; }
+    if (seen.has(f.food_id)) throw new Error(`Duplicate food slug: ${f.food_id}`);
+    seen.add(f.food_id);
+    out.push(f);
   }
   return out;
 }

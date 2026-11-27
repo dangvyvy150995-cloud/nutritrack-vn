@@ -38,6 +38,7 @@ export function FoodPicker({ open, onClose, onPick, defaultMeal = 'breakfast', s
   const [q, setQ] = useState('');
   const [cat, setCat] = useState('');
   const [prep, setPrep] = useState('');
+  const [veg, setVeg] = useState(false);
   const [tab, setTab] = useState<'all' | 'fav' | 'mine' | 'recipes'>('all');
   const [sel, setSel] = useState<FoodItem | null>(null);
   const [selRecipe, setSelRecipe] = useState<Recipe | null>(null);
@@ -50,15 +51,15 @@ export function FoodPicker({ open, onClose, onPick, defaultMeal = 'breakfast', s
 
   const results = useMemo(() => {
     if (tab === 'recipes') return [];
-    let list = foodIndex.search(q, { category: cat || undefined, prep: prep || undefined, limit: 80 });
+    let list = foodIndex.search(q, { category: cat || undefined, prep: prep || undefined, vegOnly: veg, limit: 80 });
     if (tab === 'fav') list = list.filter((f) => favorites.has(f.food_id));
     if (tab === 'mine') list = list.filter((f) => f.owner_id);
-    if (!q && tab === 'all' && !cat && !prep) {
+    if (!q && tab === 'all' && !cat && !prep && !veg) {
       const favs = foods.filter((f) => favorites.has(f.food_id));
       list = [...favs, ...list.filter((f) => !favorites.has(f.food_id))].slice(0, 80);
     }
     return list;
-  }, [foodIndex, q, cat, prep, tab, favorites, foods]);
+  }, [foodIndex, q, cat, prep, veg, tab, favorites, foods]);
 
   const name = (f: FoodItem) => (lang === 'en' && f.food_name_en ? f.food_name_en : f.food_name_vi);
   const sub = (f: FoodItem) => (lang === 'en' ? f.food_name_vi : f.food_name_en);
@@ -92,6 +93,7 @@ export function FoodPicker({ open, onClose, onPick, defaultMeal = 'breakfast', s
                   <option value="">{t('preparation')}: {t('all')}</option>
                   {PREPS.map((p) => <option key={p} value={p}>{t(`prep_${p}` as 'prep_raw')}</option>)}
                 </select>
+                <button type="button" aria-pressed={veg} onClick={() => setVeg((v) => !v)} className={cx('chip cursor-pointer border', veg ? 'border-brand-500 bg-brand-50 text-brand-700' : 'border-ink-100 text-ink-500')}>🌱 {t('veg_only')}</button>
               </>
             )}
           </div>

@@ -12,25 +12,26 @@
       "rice_noodles",
       "rice",
       "cooked",
-      "cooked"
+      "cooked",
+      "chay"
     ],
     "category": "rice_noodles",
     "subcategory": "rice",
     "calories_kcal": 130,
-    "protein_g": 2.7,
-    "carbs_g": 28.2,
-    "fat_g": 0.3,
+    "protein_g": 2.69,
+    "carbs_g": 28.17,
+    "fat_g": 0.28,
     "fiber_g": 0.4,
     "serving_size": 150,
     "serving_unit": "g",
     "preparation_method": "cooked",
     "raw_or_cooked": "cooked",
     "edible_portion": 1,
-    "data_source": "ESTIMATED – approximate value based on published generic food-composition reference values (USDA FoodData Central-type data for the closest equivalent food). Not yet checked against a specific record; pending verification against the Vietnamese Food Composition Table (NIN).",
-    "verification_status": "ESTIMATED",
+    "data_source": "USDA FoodData Central – SR Legacy (SR28), NDB 20045 \"Rice, white, long-grain, regular, enriched, cooked\", giá trị/100 g.",
+    "verification_status": "VERIFIED",
     "owner_id": null,
     "created_at": "2026-11-19T00:00:00.000Z",
-    "updated_at": "2026-11-19T00:00:00.000Z",
+    "updated_at": "2026-11-27T00:00:00.000Z",
     "servings": [
       {
         "label_vi": "1 bát",
@@ -104,7 +105,8 @@
       "rice_noodles",
       "rice",
       "cooked",
-      "cooked"
+      "cooked",
+      "chay"
     ],
     "category": "rice_noodles",
     "subcategory": "rice",
@@ -190,7 +192,8 @@
       "rice_noodles",
       "rice",
       "steamed",
-      "cooked"
+      "cooked",
+      "chay"
     ],
     "category": "rice_noodles",
     "subcategory": "rice",
@@ -270,7 +273,8 @@
       "rice_noodles",
       "rice",
       "steamed",
-      "cooked"
+      "cooked",
+      "chay"
     ],
     "category": "rice_noodles",
     "subcategory": "rice",
@@ -310,7 +314,8 @@
       "rice_noodles",
       "noodles",
       "cooked",
-      "cooked"
+      "cooked",
+      "chay"
     ],
     "category": "rice_noodles",
     "subcategory": "noodles",
@@ -389,7 +394,8 @@
       "rice_noodles",
       "noodles",
       "cooked",
-      "cooked"
+      "cooked",
+      "chay"
     ],
     "category": "rice_noodles",
     "subcategory": "noodles",
@@ -469,7 +475,8 @@
       "rice_noodles",
       "noodles",
       "cooked",
-      "cooked"
+      "cooked",
+      "chay"
     ],
     "category": "rice_noodles",
     "subcategory": "noodles",
@@ -790,7 +797,8 @@
       "rice_noodles",
       "noodles",
       "steamed",
-      "cooked"
+      "cooked",
+      "chay"
     ],
     "category": "rice_noodles",
     "subcategory": "noodles",
@@ -870,7 +878,8 @@
       "rice_noodles",
       "bread",
       "roasted",
-      "cooked"
+      "cooked",
+      "chay"
     ],
     "category": "rice_noodles",
     "subcategory": "bread",
@@ -1030,7 +1039,8 @@
       "rice_noodles",
       "tubers",
       "boiled",
-      "cooked"
+      "cooked",
+      "chay"
     ],
     "category": "rice_noodles",
     "subcategory": "tubers",
@@ -1148,7 +1158,8 @@
       "rice_noodles",
       "tubers",
       "boiled",
-      "cooked"
+      "cooked",
+      "chay"
     ],
     "category": "rice_noodles",
     "subcategory": "tubers",
@@ -1311,7 +1322,8 @@
       "rice_noodles",
       "grains",
       "boiled",
-      "cooked"
+      "cooked",
+      "chay"
     ],
     "category": "rice_noodles",
     "subcategory": "grains",
@@ -1352,7 +1364,8 @@
       "rice_noodles",
       "grains",
       "raw",
-      "dry"
+      "dry",
+      "chay"
     ],
     "category": "rice_noodles",
     "subcategory": "grains",
@@ -5116,25 +5129,26 @@
       "eggs_dairy_soy",
       "soy",
       "beverage",
-      "n/a"
+      "n/a",
+      "chay"
     ],
     "category": "eggs_dairy_soy",
     "subcategory": "soy",
     "calories_kcal": 33,
-    "protein_g": 2.9,
-    "carbs_g": 1.7,
-    "fat_g": 1.6,
-    "fiber_g": 0.4,
+    "protein_g": 2.86,
+    "carbs_g": 1.74,
+    "fat_g": 1.61,
+    "fiber_g": 0.5,
     "serving_size": 200,
     "serving_unit": "ml",
     "preparation_method": "beverage",
     "raw_or_cooked": "n/a",
     "edible_portion": 1,
-    "data_source": "ESTIMATED – approximate value based on published generic food-composition reference values (USDA FoodData Central-type data for the closest equivalent food). Not yet checked against a specific record; pending verification against the Vietnamese Food Composition Table (NIN).",
-    "verification_status": "ESTIMATED",
+    "data_source": "USDA FoodData Central – SR Legacy (SR28), NDB 16222 \"Soymilk (all flavors), unsweetened, with added calcium, vitamins A and D\", giá trị/100 g.",
+    "verification_status": "VERIFIED",
     "owner_id": null,
     "created_at": "2026-11-19T00:00:00.000Z",
-    "updated_at": "2026-11-19T00:00:00.000Z",
+    "updated_at": "2026-11-27T00:00:00.000Z",
     "servings": [
       {
         "label_vi": "1 ly",
@@ -5155,7 +5169,8 @@
       "eggs_dairy_soy",
       "soy",
       "beverage",
-      "n/a"
+      "n/a",
+      "chay"
     ],
     "category": "eggs_dairy_soy",
     "subcategory": "soy",
@@ -5475,25 +5490,26 @@
       "eggs_dairy_soy",
       "soy",
       "none",
-      "prepared"
+      "prepared",
+      "chay"
     ],
     "category": "eggs_dairy_soy",
     "subcategory": "soy",
-    "calories_kcal": 95,
-    "protein_g": 10.9,
-    "carbs_g": 1,
-    "fat_g": 5.4,
-    "fiber_g": 0.4,
+    "calories_kcal": 76,
+    "protein_g": 8.08,
+    "carbs_g": 1.87,
+    "fat_g": 4.78,
+    "fiber_g": 0.3,
     "serving_size": 100,
     "serving_unit": "g",
     "preparation_method": "none",
     "raw_or_cooked": "prepared",
     "edible_portion": 1,
-    "data_source": "ESTIMATED – approximate value based on published generic food-composition reference values (USDA FoodData Central-type data for the closest equivalent food). Not yet checked against a specific record; pending verification against the Vietnamese Food Composition Table (NIN).",
-    "verification_status": "ESTIMATED",
+    "data_source": "USDA FoodData Central – SR Legacy (SR28), NDB 16427 \"Tofu, raw, regular, prepared with calcium sulfate\", giá trị/100 g.",
+    "verification_status": "VERIFIED",
     "owner_id": null,
     "created_at": "2026-11-19T00:00:00.000Z",
-    "updated_at": "2026-11-19T00:00:00.000Z",
+    "updated_at": "2026-11-27T00:00:00.000Z",
     "servings": [
       {
         "label_vi": "1 bìa",
@@ -5515,25 +5531,26 @@
       "eggs_dairy_soy",
       "soy",
       "none",
-      "prepared"
+      "prepared",
+      "chay"
     ],
     "category": "eggs_dairy_soy",
     "subcategory": "soy",
     "calories_kcal": 144,
-    "protein_g": 17.3,
-    "carbs_g": 2.8,
-    "fat_g": 8.7,
+    "protein_g": 17.27,
+    "carbs_g": 2.78,
+    "fat_g": 8.72,
     "fiber_g": 2.3,
     "serving_size": 100,
     "serving_unit": "g",
     "preparation_method": "none",
     "raw_or_cooked": "prepared",
     "edible_portion": 1,
-    "data_source": "ESTIMATED – approximate value based on published generic food-composition reference values (USDA FoodData Central-type data for the closest equivalent food). Not yet checked against a specific record; pending verification against the Vietnamese Food Composition Table (NIN).",
-    "verification_status": "ESTIMATED",
+    "data_source": "USDA FoodData Central – SR Legacy (SR28), NDB 16426 \"Tofu, raw, firm, prepared with calcium sulfate\", giá trị/100 g.",
+    "verification_status": "VERIFIED",
     "owner_id": null,
     "created_at": "2026-11-19T00:00:00.000Z",
-    "updated_at": "2026-11-19T00:00:00.000Z",
+    "updated_at": "2026-11-27T00:00:00.000Z",
     "servings": [
       {
         "label_vi": "1 bìa",
@@ -5596,25 +5613,26 @@
       "eggs_dairy_soy",
       "legumes",
       "boiled",
-      "cooked"
+      "cooked",
+      "chay"
     ],
     "category": "eggs_dairy_soy",
     "subcategory": "legumes",
     "calories_kcal": 172,
-    "protein_g": 18.2,
-    "carbs_g": 8.4,
-    "fat_g": 9,
+    "protein_g": 18.21,
+    "carbs_g": 8.36,
+    "fat_g": 8.97,
     "fiber_g": 6,
     "serving_size": 100,
     "serving_unit": "g",
     "preparation_method": "boiled",
     "raw_or_cooked": "cooked",
     "edible_portion": 1,
-    "data_source": "ESTIMATED – approximate value based on published generic food-composition reference values (USDA FoodData Central-type data for the closest equivalent food). Not yet checked against a specific record; pending verification against the Vietnamese Food Composition Table (NIN).",
-    "verification_status": "ESTIMATED",
+    "data_source": "USDA FoodData Central – SR Legacy (SR28), NDB 16109 \"Soybeans, mature cooked, boiled, without salt\", giá trị/100 g.",
+    "verification_status": "VERIFIED",
     "owner_id": null,
     "created_at": "2026-11-19T00:00:00.000Z",
-    "updated_at": "2026-11-19T00:00:00.000Z",
+    "updated_at": "2026-11-27T00:00:00.000Z",
     "servings": [
       {
         "label_vi": "1 phần",
@@ -5675,7 +5693,8 @@
       "eggs_dairy_soy",
       "legumes",
       "raw",
-      "dry"
+      "dry",
+      "chay"
     ],
     "category": "eggs_dairy_soy",
     "subcategory": "legumes",
@@ -5714,25 +5733,26 @@
       "eggs_dairy_soy",
       "legumes",
       "boiled",
-      "cooked"
+      "cooked",
+      "chay"
     ],
     "category": "eggs_dairy_soy",
     "subcategory": "legumes",
     "calories_kcal": 105,
-    "protein_g": 7,
-    "carbs_g": 19.2,
-    "fat_g": 0.4,
+    "protein_g": 7.02,
+    "carbs_g": 19.15,
+    "fat_g": 0.38,
     "fiber_g": 7.6,
     "serving_size": 100,
     "serving_unit": "g",
     "preparation_method": "boiled",
     "raw_or_cooked": "cooked",
     "edible_portion": 1,
-    "data_source": "ESTIMATED – approximate value based on published generic food-composition reference values (USDA FoodData Central-type data for the closest equivalent food). Not yet checked against a specific record; pending verification against the Vietnamese Food Composition Table (NIN).",
-    "verification_status": "ESTIMATED",
+    "data_source": "USDA FoodData Central – SR Legacy (SR28), NDB 16081 \"Mung beans, mature seeds, cooked, boiled, without salt\", giá trị/100 g.",
+    "verification_status": "VERIFIED",
     "owner_id": null,
     "created_at": "2026-11-19T00:00:00.000Z",
-    "updated_at": "2026-11-19T00:00:00.000Z",
+    "updated_at": "2026-11-27T00:00:00.000Z",
     "servings": [
       {
         "label_vi": "1 phần",
@@ -5793,25 +5813,26 @@
       "eggs_dairy_soy",
       "legumes",
       "boiled",
-      "cooked"
+      "cooked",
+      "chay"
     ],
     "category": "eggs_dairy_soy",
     "subcategory": "legumes",
     "calories_kcal": 132,
-    "protein_g": 8.9,
-    "carbs_g": 23.7,
-    "fat_g": 0.5,
+    "protein_g": 8.86,
+    "carbs_g": 23.71,
+    "fat_g": 0.54,
     "fiber_g": 8.7,
     "serving_size": 100,
     "serving_unit": "g",
     "preparation_method": "boiled",
     "raw_or_cooked": "cooked",
     "edible_portion": 1,
-    "data_source": "ESTIMATED – approximate value based on published generic food-composition reference values (USDA FoodData Central-type data for the closest equivalent food). Not yet checked against a specific record; pending verification against the Vietnamese Food Composition Table (NIN).",
-    "verification_status": "ESTIMATED",
+    "data_source": "USDA FoodData Central – SR Legacy (SR28), NDB 16015 \"Beans, black, mature seeds, cooked, boiled, without salt\", giá trị/100 g.",
+    "verification_status": "VERIFIED",
     "owner_id": null,
     "created_at": "2026-11-19T00:00:00.000Z",
-    "updated_at": "2026-11-19T00:00:00.000Z",
+    "updated_at": "2026-11-27T00:00:00.000Z",
     "servings": [
       {
         "label_vi": "1 phần",
@@ -5912,7 +5933,8 @@
       "eggs_dairy_soy",
       "legumes",
       "raw",
-      "dry"
+      "dry",
+      "chay"
     ],
     "category": "eggs_dairy_soy",
     "subcategory": "legumes",
@@ -5951,25 +5973,26 @@
       "eggs_dairy_soy",
       "legumes",
       "boiled",
-      "cooked"
+      "cooked",
+      "chay"
     ],
     "category": "eggs_dairy_soy",
     "subcategory": "legumes",
     "calories_kcal": 116,
-    "protein_g": 9,
-    "carbs_g": 20.1,
-    "fat_g": 0.4,
+    "protein_g": 9.02,
+    "carbs_g": 20.13,
+    "fat_g": 0.38,
     "fiber_g": 7.9,
     "serving_size": 100,
     "serving_unit": "g",
     "preparation_method": "boiled",
     "raw_or_cooked": "cooked",
     "edible_portion": 1,
-    "data_source": "ESTIMATED – approximate value based on published generic food-composition reference values (USDA FoodData Central-type data for the closest equivalent food). Not yet checked against a specific record; pending verification against the Vietnamese Food Composition Table (NIN).",
-    "verification_status": "ESTIMATED",
+    "data_source": "USDA FoodData Central – SR Legacy (SR28), NDB 16070 \"Lentils, mature seeds, cooked, boiled, without salt\", giá trị/100 g.",
+    "verification_status": "VERIFIED",
     "owner_id": null,
     "created_at": "2026-11-19T00:00:00.000Z",
-    "updated_at": "2026-11-19T00:00:00.000Z",
+    "updated_at": "2026-11-27T00:00:00.000Z",
     "servings": [
       {
         "label_vi": "1 phần",
@@ -5992,13 +6015,14 @@
       "vegetables",
       "leafy",
       "raw",
-      "raw"
+      "raw",
+      "chay"
     ],
     "category": "vegetables",
     "subcategory": "leafy",
     "calories_kcal": 19,
     "protein_g": 2.6,
-    "carbs_g": 3.1,
+    "carbs_g": 3.14,
     "fat_g": 0.2,
     "fiber_g": 2.1,
     "serving_size": 100,
@@ -6006,11 +6030,11 @@
     "preparation_method": "raw",
     "raw_or_cooked": "raw",
     "edible_portion": 0.7,
-    "data_source": "ESTIMATED – approximate value based on published generic food-composition reference values (USDA FoodData Central-type data for the closest equivalent food). Not yet checked against a specific record; pending verification against the Vietnamese Food Composition Table (NIN).",
-    "verification_status": "ESTIMATED",
+    "data_source": "USDA FoodData Central – SR Legacy (SR28), NDB 11503 \"Swamp cabbage, (skunk cabbage), raw\", giá trị/100 g.",
+    "verification_status": "VERIFIED",
     "owner_id": null,
     "created_at": "2026-11-19T00:00:00.000Z",
-    "updated_at": "2026-11-19T00:00:00.000Z",
+    "updated_at": "2026-11-27T00:00:00.000Z",
     "servings": [
       {
         "label_vi": "1 phần",
@@ -6031,7 +6055,8 @@
       "vegetables",
       "leafy",
       "boiled",
-      "cooked"
+      "cooked",
+      "chay"
     ],
     "category": "vegetables",
     "subcategory": "leafy",
@@ -7539,25 +7564,26 @@
       "vegetables",
       "sprouts",
       "raw",
-      "raw"
+      "raw",
+      "chay"
     ],
     "category": "vegetables",
     "subcategory": "sprouts",
     "calories_kcal": 30,
-    "protein_g": 3,
-    "carbs_g": 5.9,
-    "fat_g": 0.2,
+    "protein_g": 3.04,
+    "carbs_g": 5.94,
+    "fat_g": 0.18,
     "fiber_g": 1.8,
     "serving_size": 50,
     "serving_unit": "g",
     "preparation_method": "raw",
     "raw_or_cooked": "raw",
     "edible_portion": 1,
-    "data_source": "ESTIMATED – approximate value based on published generic food-composition reference values (USDA FoodData Central-type data for the closest equivalent food). Not yet checked against a specific record; pending verification against the Vietnamese Food Composition Table (NIN).",
-    "verification_status": "ESTIMATED",
+    "data_source": "USDA FoodData Central – SR Legacy (SR28), NDB 11043 \"Mung beans, mature seeds, sprouted, raw\", giá trị/100 g.",
+    "verification_status": "VERIFIED",
     "owner_id": null,
     "created_at": "2026-11-19T00:00:00.000Z",
-    "updated_at": "2026-11-19T00:00:00.000Z",
+    "updated_at": "2026-11-27T00:00:00.000Z",
     "servings": [
       {
         "label_vi": "1 phần",
@@ -7578,7 +7604,8 @@
       "vegetables",
       "mushroom",
       "raw",
-      "raw"
+      "raw",
+      "chay"
     ],
     "category": "vegetables",
     "subcategory": "mushroom",
@@ -7618,7 +7645,8 @@
       "vegetables",
       "mushroom",
       "raw",
-      "raw"
+      "raw",
+      "chay"
     ],
     "category": "vegetables",
     "subcategory": "mushroom",
@@ -7658,7 +7686,8 @@
       "vegetables",
       "mushroom",
       "raw",
-      "raw"
+      "raw",
+      "chay"
     ],
     "category": "vegetables",
     "subcategory": "mushroom",
@@ -7697,7 +7726,8 @@
       "vegetables",
       "mushroom",
       "dried",
-      "dry"
+      "dry",
+      "chay"
     ],
     "category": "vegetables",
     "subcategory": "mushroom",
@@ -7736,7 +7766,8 @@
       "vegetables",
       "mushroom",
       "raw",
-      "raw"
+      "raw",
+      "chay"
     ],
     "category": "vegetables",
     "subcategory": "mushroom",
@@ -9617,7 +9648,8 @@
       "oils_condiments",
       "oils",
       "none",
-      "n/a"
+      "n/a",
+      "chay"
     ],
     "category": "oils_condiments",
     "subcategory": "oils",
@@ -9631,11 +9663,11 @@
     "preparation_method": "none",
     "raw_or_cooked": "n/a",
     "edible_portion": 1,
-    "data_source": "ESTIMATED – approximate value based on published generic food-composition reference values (USDA FoodData Central-type data for the closest equivalent food). Not yet checked against a specific record; pending verification against the Vietnamese Food Composition Table (NIN).",
-    "verification_status": "ESTIMATED",
+    "data_source": "USDA FoodData Central – SR Legacy (SR28), NDB 04044 \"Oil, soybean, salad or cooking\", giá trị/100 g.",
+    "verification_status": "VERIFIED",
     "owner_id": null,
     "created_at": "2026-11-19T00:00:00.000Z",
-    "updated_at": "2026-11-19T00:00:00.000Z",
+    "updated_at": "2026-11-27T00:00:00.000Z",
     "servings": [
       {
         "label_vi": "1 muỗng canh",
@@ -9828,7 +9860,8 @@
       "oils_condiments",
       "spreads",
       "processed",
-      "n/a"
+      "n/a",
+      "chay"
     ],
     "category": "oils_condiments",
     "subcategory": "spreads",
@@ -9953,25 +9986,26 @@
       "oils_condiments",
       "sauces",
       "processed",
-      "n/a"
+      "n/a",
+      "chay"
     ],
     "category": "oils_condiments",
     "subcategory": "sauces",
     "calories_kcal": 53,
-    "protein_g": 8.1,
-    "carbs_g": 4.9,
-    "fat_g": 0.6,
+    "protein_g": 8.14,
+    "carbs_g": 4.93,
+    "fat_g": 0.57,
     "fiber_g": 0.8,
     "serving_size": 16,
     "serving_unit": "g",
     "preparation_method": "processed",
     "raw_or_cooked": "n/a",
     "edible_portion": 1,
-    "data_source": "ESTIMATED – approximate value based on published generic food-composition reference values (USDA FoodData Central-type data for the closest equivalent food). Not yet checked against a specific record; pending verification against the Vietnamese Food Composition Table (NIN).",
-    "verification_status": "ESTIMATED",
+    "data_source": "USDA FoodData Central – SR Legacy (SR28), NDB 16123 \"Soy sauce made from soy and wheat (shoyu)\", giá trị/100 g.",
+    "verification_status": "VERIFIED",
     "owner_id": null,
     "created_at": "2026-11-19T00:00:00.000Z",
-    "updated_at": "2026-11-19T00:00:00.000Z",
+    "updated_at": "2026-11-27T00:00:00.000Z",
     "servings": [
       {
         "label_vi": "1 muỗng canh",
@@ -10111,25 +10145,26 @@
       "oils_condiments",
       "sauces",
       "processed",
-      "n/a"
+      "n/a",
+      "chay"
     ],
     "category": "oils_condiments",
     "subcategory": "sauces",
     "calories_kcal": 220,
-    "protein_g": 3.3,
-    "carbs_g": 44,
-    "fat_g": 3.4,
+    "protein_g": 3.31,
+    "carbs_g": 44.08,
+    "fat_g": 3.39,
     "fiber_g": 2.8,
     "serving_size": 16,
     "serving_unit": "g",
     "preparation_method": "processed",
     "raw_or_cooked": "n/a",
     "edible_portion": 1,
-    "data_source": "ESTIMATED – approximate value based on published generic food-composition reference values (USDA FoodData Central-type data for the closest equivalent food). Not yet checked against a specific record; pending verification against the Vietnamese Food Composition Table (NIN).",
-    "verification_status": "ESTIMATED",
+    "data_source": "USDA FoodData Central – SR Legacy (SR28), NDB 06175 \"Sauce, hoisin, ready-to-serve\", giá trị/100 g.",
+    "verification_status": "VERIFIED",
     "owner_id": null,
     "created_at": "2026-11-19T00:00:00.000Z",
-    "updated_at": "2026-11-19T00:00:00.000Z",
+    "updated_at": "2026-11-27T00:00:00.000Z",
     "servings": [
       {
         "label_vi": "1 muỗng canh",
@@ -10468,25 +10503,26 @@
       "oils_condiments",
       "toppings",
       "roasted",
-      "cooked"
+      "cooked",
+      "chay"
     ],
     "category": "oils_condiments",
     "subcategory": "toppings",
-    "calories_kcal": 585,
-    "protein_g": 23.7,
-    "carbs_g": 21.5,
-    "fat_g": 49.7,
-    "fiber_g": 8,
+    "calories_kcal": 587,
+    "protein_g": 24.35,
+    "carbs_g": 21.26,
+    "fat_g": 49.66,
+    "fiber_g": 8.4,
     "serving_size": 28,
     "serving_unit": "g",
     "preparation_method": "roasted",
     "raw_or_cooked": "cooked",
     "edible_portion": 1,
-    "data_source": "ESTIMATED – approximate value based on published generic food-composition reference values (USDA FoodData Central-type data for the closest equivalent food). Not yet checked against a specific record; pending verification against the Vietnamese Food Composition Table (NIN).",
-    "verification_status": "ESTIMATED",
+    "data_source": "USDA FoodData Central – SR Legacy (SR28), NDB 16390 \"Peanuts, all types, dry-roasted, without salt\", giá trị/100 g.",
+    "verification_status": "VERIFIED",
     "owner_id": null,
     "created_at": "2026-11-19T00:00:00.000Z",
-    "updated_at": "2026-11-19T00:00:00.000Z",
+    "updated_at": "2026-11-27T00:00:00.000Z",
     "servings": [
       {
         "label_vi": "1 nắm",
@@ -10508,25 +10544,26 @@
       "oils_condiments",
       "toppings",
       "none",
-      "dry"
+      "dry",
+      "chay"
     ],
     "category": "oils_condiments",
     "subcategory": "toppings",
     "calories_kcal": 573,
-    "protein_g": 17.7,
-    "carbs_g": 23.5,
-    "fat_g": 49.7,
+    "protein_g": 17.73,
+    "carbs_g": 23.45,
+    "fat_g": 49.67,
     "fiber_g": 11.8,
     "serving_size": 9,
     "serving_unit": "g",
     "preparation_method": "none",
     "raw_or_cooked": "dry",
     "edible_portion": 1,
-    "data_source": "ESTIMATED – approximate value based on published generic food-composition reference values (USDA FoodData Central-type data for the closest equivalent food). Not yet checked against a specific record; pending verification against the Vietnamese Food Composition Table (NIN).",
-    "verification_status": "ESTIMATED",
+    "data_source": "USDA FoodData Central – SR Legacy (SR28), NDB 12023 \"Seeds, sesame seeds, whole, dried\", giá trị/100 g.",
+    "verification_status": "VERIFIED",
     "owner_id": null,
     "created_at": "2026-11-19T00:00:00.000Z",
-    "updated_at": "2026-11-19T00:00:00.000Z",
+    "updated_at": "2026-11-27T00:00:00.000Z",
     "servings": [
       {
         "label_vi": "1 muỗng canh",
@@ -13464,25 +13501,26 @@
       "home_meals",
       "tofu",
       "fried",
-      "cooked"
+      "cooked",
+      "chay"
     ],
     "category": "home_meals",
     "subcategory": "tofu",
     "calories_kcal": 270,
-    "protein_g": 17,
-    "carbs_g": 10,
-    "fat_g": 18,
+    "protein_g": 18.82,
+    "carbs_g": 8.86,
+    "fat_g": 20.18,
     "fiber_g": 3.9,
     "serving_size": 100,
     "serving_unit": "g",
     "preparation_method": "fried",
     "raw_or_cooked": "cooked",
     "edible_portion": 1,
-    "data_source": "ESTIMATED – approximate value based on published generic food-composition reference values (USDA FoodData Central-type data for the closest equivalent food). Not yet checked against a specific record; pending verification against the Vietnamese Food Composition Table (NIN).",
-    "verification_status": "ESTIMATED",
+    "data_source": "USDA FoodData Central – SR Legacy (SR28), NDB 16429 \"Tofu, fried, prepared with calcium sulfate\", giá trị/100 g.",
+    "verification_status": "VERIFIED",
     "owner_id": null,
     "created_at": "2026-11-19T00:00:00.000Z",
-    "updated_at": "2026-11-19T00:00:00.000Z",
+    "updated_at": "2026-11-27T00:00:00.000Z",
     "servings": [
       {
         "label_vi": "1 phần",
@@ -13494,40 +13532,42 @@
   },
   {
     "food_id": "dau-sot-ca",
-    "food_name_vi": "Đậu sốt cà chua",
-    "food_name_en": "Tofu with tomato sauce",
+    "food_name_vi": "Đậu hũ chiên sốt cà chua",
+    "food_name_en": "Fried tofu in tomato sauce",
     "alternative_names": [
-      "đậu phụ sốt cà",
+      "đậu sốt cà",
+      "đậu phụ sốt cà chua",
       "tofu tomato"
     ],
     "search_keywords": [
-      "home_meals",
+      "vegetarian",
+      "chay",
       "tofu",
       "braised",
       "cooked"
     ],
-    "category": "home_meals",
+    "category": "vegetarian",
     "subcategory": "tofu",
-    "calories_kcal": 142,
-    "protein_g": 8,
-    "carbs_g": 6,
-    "fat_g": 9.5,
-    "fiber_g": 1,
-    "serving_size": 200,
+    "calories_kcal": 175,
+    "protein_g": 10,
+    "carbs_g": 7.6,
+    "fat_g": 13.1,
+    "fiber_g": 2.5,
+    "serving_size": 240,
     "serving_unit": "g",
     "preparation_method": "braised",
     "raw_or_cooked": "cooked",
     "edible_portion": 1,
-    "data_source": "ESTIMATED – calculated from a typical Vietnamese recipe composition (ingredients, oil and broth). Real values vary widely by cook, vendor and portion.",
+    "data_source": "ƯỚC TÍNH – tính từ công thức 1 đĩa 240 g: đậu hũ chiên 120 g (USDA 16429) + cà chua 100 g (USDA 11529) + dầu ăn 7 g (USDA 04044) + hành lá 5 g (USDA 11291) + đường 3 g (USDA 19335) + nước tương 5 g (USDA 16123). Tổng 1 đĩa: 420 kcal, 24 g đạm. Số liệu nguyên liệu: USDA FoodData Central – SR Legacy (SR28), theo mã NDB. Thực tế thay đổi theo quán, khẩu phần và lượng dầu.",
     "verification_status": "ESTIMATED",
     "owner_id": null,
-    "created_at": "2026-11-19T00:00:00.000Z",
-    "updated_at": "2026-11-19T00:00:00.000Z",
+    "created_at": "2026-11-27T00:00:00.000Z",
+    "updated_at": "2026-11-27T00:00:00.000Z",
     "servings": [
       {
         "label_vi": "1 đĩa",
         "label_en": "1 plate",
-        "grams": 200,
+        "grams": 240,
         "is_default": true
       }
     ]
@@ -13662,7 +13702,8 @@
       "home_meals",
       "vegetables",
       "stir_fried",
-      "cooked"
+      "cooked",
+      "chay"
     ],
     "category": "home_meals",
     "subcategory": "vegetables",
@@ -14531,7 +14572,8 @@
       "snacks_desserts",
       "che",
       "boiled",
-      "prepared"
+      "prepared",
+      "chay"
     ],
     "category": "snacks_desserts",
     "subcategory": "che",
@@ -14570,7 +14612,8 @@
       "snacks_desserts",
       "che",
       "boiled",
-      "prepared"
+      "prepared",
+      "chay"
     ],
     "category": "snacks_desserts",
     "subcategory": "che",
@@ -14766,7 +14809,8 @@
       "snacks_desserts",
       "sweet",
       "prepared",
-      "prepared"
+      "prepared",
+      "chay"
     ],
     "category": "snacks_desserts",
     "subcategory": "sweet",
@@ -16008,7 +16052,8 @@
       "supplements",
       "protein",
       "processed",
-      "n/a"
+      "n/a",
+      "chay"
     ],
     "category": "supplements",
     "subcategory": "protein",
@@ -17786,25 +17831,26 @@
       "nuts_dried",
       "nuts",
       "roasted",
-      "cooked"
+      "cooked",
+      "chay"
     ],
     "category": "nuts_dried",
     "subcategory": "nuts",
     "calories_kcal": 574,
-    "protein_g": 15.3,
-    "carbs_g": 32.7,
-    "fat_g": 46.4,
+    "protein_g": 15.31,
+    "carbs_g": 32.69,
+    "fat_g": 46.35,
     "fiber_g": 3,
     "serving_size": 28,
     "serving_unit": "g",
     "preparation_method": "roasted",
     "raw_or_cooked": "cooked",
     "edible_portion": 1,
-    "data_source": "ESTIMATED – approximate value based on published generic food-composition reference values (USDA FoodData Central-type data for the closest equivalent food). Not yet checked against a specific record; pending verification against the Vietnamese Food Composition Table (NIN).",
-    "verification_status": "ESTIMATED",
+    "data_source": "USDA FoodData Central – SR Legacy (SR28), NDB 12085 \"Nuts, cashew nuts, dry roasted, without salt added\", giá trị/100 g.",
+    "verification_status": "VERIFIED",
     "owner_id": null,
     "created_at": "2026-11-19T00:00:00.000Z",
-    "updated_at": "2026-11-19T00:00:00.000Z",
+    "updated_at": "2026-11-27T00:00:00.000Z",
     "servings": [
       {
         "label_vi": "1 nắm",
@@ -17983,7 +18029,8 @@
       "nuts_dried",
       "nuts",
       "raw",
-      "raw"
+      "raw",
+      "chay"
     ],
     "category": "nuts_dried",
     "subcategory": "nuts",
@@ -18022,25 +18069,26 @@
       "nuts_dried",
       "seeds",
       "raw",
-      "dry"
+      "dry",
+      "chay"
     ],
     "category": "nuts_dried",
     "subcategory": "seeds",
     "calories_kcal": 486,
-    "protein_g": 16.5,
-    "carbs_g": 42.1,
-    "fat_g": 30.7,
+    "protein_g": 16.54,
+    "carbs_g": 42.12,
+    "fat_g": 30.74,
     "fiber_g": 34.4,
     "serving_size": 12,
     "serving_unit": "g",
     "preparation_method": "raw",
     "raw_or_cooked": "dry",
     "edible_portion": 1,
-    "data_source": "ESTIMATED – approximate value based on published generic food-composition reference values (USDA FoodData Central-type data for the closest equivalent food). Not yet checked against a specific record; pending verification against the Vietnamese Food Composition Table (NIN).",
-    "verification_status": "ESTIMATED",
+    "data_source": "USDA FoodData Central – SR Legacy (SR28), NDB 12006 \"Seeds, chia seeds, dried\", giá trị/100 g.",
+    "verification_status": "VERIFIED",
     "owner_id": null,
     "created_at": "2026-11-19T00:00:00.000Z",
-    "updated_at": "2026-11-19T00:00:00.000Z",
+    "updated_at": "2026-11-27T00:00:00.000Z",
     "servings": [
       {
         "label_vi": "1 muỗng canh",
@@ -18062,25 +18110,26 @@
       "nuts_dried",
       "seeds",
       "raw",
-      "dry"
+      "dry",
+      "chay"
     ],
     "category": "nuts_dried",
     "subcategory": "seeds",
     "calories_kcal": 534,
-    "protein_g": 18.3,
-    "carbs_g": 28.9,
-    "fat_g": 42.2,
+    "protein_g": 18.29,
+    "carbs_g": 28.88,
+    "fat_g": 42.16,
     "fiber_g": 27.3,
     "serving_size": 10,
     "serving_unit": "g",
     "preparation_method": "raw",
     "raw_or_cooked": "dry",
     "edible_portion": 1,
-    "data_source": "ESTIMATED – approximate value based on published generic food-composition reference values (USDA FoodData Central-type data for the closest equivalent food). Not yet checked against a specific record; pending verification against the Vietnamese Food Composition Table (NIN).",
-    "verification_status": "ESTIMATED",
+    "data_source": "USDA FoodData Central – SR Legacy (SR28), NDB 12220 \"Seeds, flaxseed\", giá trị/100 g.",
+    "verification_status": "VERIFIED",
     "owner_id": null,
     "created_at": "2026-11-19T00:00:00.000Z",
-    "updated_at": "2026-11-19T00:00:00.000Z",
+    "updated_at": "2026-11-27T00:00:00.000Z",
     "servings": [
       {
         "label_vi": "1 muỗng canh",
@@ -18259,7 +18308,8 @@
       "nuts_dried",
       "seeds",
       "none",
-      "dry"
+      "dry",
+      "chay"
     ],
     "category": "nuts_dried",
     "subcategory": "seeds",
@@ -19295,7 +19345,8 @@
       "vegetables",
       "mushroom",
       "raw",
-      "raw"
+      "raw",
+      "chay"
     ],
     "category": "vegetables",
     "subcategory": "mushroom",
@@ -20072,6 +20123,1040 @@
         "label_vi": "1 tô",
         "label_en": "1 bowl",
         "grams": 550,
+        "is_default": true
+      }
+    ]
+  },
+  {
+    "food_id": "tempeh",
+    "food_name_vi": "Tempeh (đậu nành lên men)",
+    "food_name_en": "Tempeh",
+    "alternative_names": [
+      "tempeh",
+      "đậu nành lên men"
+    ],
+    "search_keywords": [
+      "vegetarian",
+      "chay",
+      "protein",
+      "none",
+      "prepared"
+    ],
+    "category": "vegetarian",
+    "subcategory": "protein",
+    "calories_kcal": 192,
+    "protein_g": 20.3,
+    "carbs_g": 7.6,
+    "fat_g": 10.8,
+    "fiber_g": 0,
+    "serving_size": 100,
+    "serving_unit": "g",
+    "preparation_method": "none",
+    "raw_or_cooked": "prepared",
+    "edible_portion": 1,
+    "data_source": "USDA FoodData Central – SR Legacy (SR28), NDB 16114 \"Tempeh\", giá trị/100 g.",
+    "verification_status": "VERIFIED",
+    "owner_id": null,
+    "created_at": "2026-11-27T00:00:00.000Z",
+    "updated_at": "2026-11-27T00:00:00.000Z",
+    "servings": [
+      {
+        "label_vi": "1 miếng",
+        "label_en": "1 piece",
+        "grams": 100,
+        "is_default": true
+      }
+    ]
+  },
+  {
+    "food_id": "dau-hu-non",
+    "food_name_vi": "Đậu hũ non",
+    "food_name_en": "Soft tofu",
+    "alternative_names": [
+      "tàu hũ non",
+      "đậu phụ non",
+      "silken tofu",
+      "soft tofu"
+    ],
+    "search_keywords": [
+      "vegetarian",
+      "chay",
+      "protein",
+      "none",
+      "prepared"
+    ],
+    "category": "vegetarian",
+    "subcategory": "protein",
+    "calories_kcal": 61,
+    "protein_g": 7.2,
+    "carbs_g": 1.2,
+    "fat_g": 3.7,
+    "fiber_g": 0.2,
+    "serving_size": 150,
+    "serving_unit": "g",
+    "preparation_method": "none",
+    "raw_or_cooked": "prepared",
+    "edible_portion": 1,
+    "data_source": "USDA FoodData Central – SR Legacy (SR28), NDB 16127 \"Tofu, soft, prepared with calcium sulfate and magnesium chloride (nigari)\", giá trị/100 g.",
+    "verification_status": "VERIFIED",
+    "owner_id": null,
+    "created_at": "2026-11-27T00:00:00.000Z",
+    "updated_at": "2026-11-27T00:00:00.000Z",
+    "servings": [
+      {
+        "label_vi": "1 hộp",
+        "label_en": "1 pack",
+        "grams": 150,
+        "is_default": true
+      }
+    ]
+  },
+  {
+    "food_id": "dau-ga-luoc",
+    "food_name_vi": "Đậu gà luộc",
+    "food_name_en": "Chickpeas, boiled",
+    "alternative_names": [
+      "đậu gà",
+      "đậu răng ngựa",
+      "chickpeas",
+      "garbanzo"
+    ],
+    "search_keywords": [
+      "vegetarian",
+      "chay",
+      "legumes",
+      "boiled",
+      "cooked"
+    ],
+    "category": "vegetarian",
+    "subcategory": "legumes",
+    "calories_kcal": 164,
+    "protein_g": 8.9,
+    "carbs_g": 27.4,
+    "fat_g": 2.6,
+    "fiber_g": 7.6,
+    "serving_size": 165,
+    "serving_unit": "g",
+    "preparation_method": "boiled",
+    "raw_or_cooked": "cooked",
+    "edible_portion": 1,
+    "data_source": "USDA FoodData Central – SR Legacy (SR28), NDB 16057 \"Chickpeas (garbanzo beans, bengal gram), mature seeds, cooked, boiled, without salt\", giá trị/100 g.",
+    "verification_status": "VERIFIED",
+    "owner_id": null,
+    "created_at": "2026-11-27T00:00:00.000Z",
+    "updated_at": "2026-11-27T00:00:00.000Z",
+    "servings": [
+      {
+        "label_vi": "1 chén",
+        "label_en": "1 cup",
+        "grams": 165,
+        "is_default": true
+      }
+    ]
+  },
+  {
+    "food_id": "edamame",
+    "food_name_vi": "Đậu nành Nhật (edamame) luộc",
+    "food_name_en": "Edamame, cooked",
+    "alternative_names": [
+      "edamame",
+      "đậu nành rau",
+      "đậu nành non"
+    ],
+    "search_keywords": [
+      "vegetarian",
+      "chay",
+      "legumes",
+      "boiled",
+      "cooked"
+    ],
+    "category": "vegetarian",
+    "subcategory": "legumes",
+    "calories_kcal": 121,
+    "protein_g": 11.9,
+    "carbs_g": 8.9,
+    "fat_g": 5.2,
+    "fiber_g": 5.2,
+    "serving_size": 100,
+    "serving_unit": "g",
+    "preparation_method": "boiled",
+    "raw_or_cooked": "cooked",
+    "edible_portion": 1,
+    "data_source": "USDA FoodData Central – SR Legacy (SR28), NDB 11212 \"Edamame, frozen, prepared\", giá trị/100 g.",
+    "verification_status": "VERIFIED",
+    "owner_id": null,
+    "created_at": "2026-11-27T00:00:00.000Z",
+    "updated_at": "2026-11-27T00:00:00.000Z",
+    "servings": [
+      {
+        "label_vi": "1 chén (bóc vỏ)",
+        "label_en": "1 cup (shelled)",
+        "grams": 100,
+        "is_default": true
+      }
+    ]
+  },
+  {
+    "food_id": "nam-rom-chin",
+    "food_name_vi": "Nấm rơm (đóng hộp, ráo nước)",
+    "food_name_en": "Straw mushrooms, canned, drained",
+    "alternative_names": [
+      "nấm rơm hộp"
+    ],
+    "search_keywords": [
+      "vegetarian",
+      "chay",
+      "mushroom",
+      "processed",
+      "cooked"
+    ],
+    "category": "vegetarian",
+    "subcategory": "mushroom",
+    "calories_kcal": 32,
+    "protein_g": 3.8,
+    "carbs_g": 4.6,
+    "fat_g": 0.7,
+    "fiber_g": 2.5,
+    "serving_size": 100,
+    "serving_unit": "g",
+    "preparation_method": "processed",
+    "raw_or_cooked": "cooked",
+    "edible_portion": 1,
+    "data_source": "USDA FoodData Central – SR Legacy (SR28), NDB 11989 \"Mushrooms, straw, canned, drained solids\", giá trị/100 g.",
+    "verification_status": "VERIFIED",
+    "owner_id": null,
+    "created_at": "2026-11-27T00:00:00.000Z",
+    "updated_at": "2026-11-27T00:00:00.000Z",
+    "servings": [
+      {
+        "label_vi": "1 phần",
+        "label_en": "1 portion",
+        "grams": 100,
+        "is_default": true
+      }
+    ]
+  },
+  {
+    "food_id": "gluten-bot",
+    "food_name_vi": "Bột gluten lúa mì (làm mì căn)",
+    "food_name_en": "Vital wheat gluten",
+    "alternative_names": [
+      "bột mì căn",
+      "vital wheat gluten",
+      "seitan flour"
+    ],
+    "search_keywords": [
+      "vegetarian",
+      "chay",
+      "protein",
+      "none",
+      "dry"
+    ],
+    "category": "vegetarian",
+    "subcategory": "protein",
+    "calories_kcal": 370,
+    "protein_g": 75.2,
+    "carbs_g": 13.8,
+    "fat_g": 1.9,
+    "fiber_g": 0.6,
+    "serving_size": 30,
+    "serving_unit": "g",
+    "preparation_method": "none",
+    "raw_or_cooked": "dry",
+    "edible_portion": 1,
+    "data_source": "USDA FoodData Central – SR Legacy (SR28), NDB 48052 \"Vital wheat gluten\", giá trị/100 g.",
+    "verification_status": "VERIFIED",
+    "owner_id": null,
+    "created_at": "2026-11-27T00:00:00.000Z",
+    "updated_at": "2026-11-27T00:00:00.000Z",
+    "servings": [
+      {
+        "label_vi": "1 phần",
+        "label_en": "1 portion",
+        "grams": 30,
+        "is_default": true
+      }
+    ]
+  },
+  {
+    "food_id": "dam-dau-nanh-kho",
+    "food_name_vi": "Đạm đậu nành khô (TVP, sườn non chay khô)",
+    "food_name_en": "Textured soy protein (TVP), dry",
+    "alternative_names": [
+      "sườn non chay khô",
+      "thịt chay khô",
+      "tvp",
+      "textured vegetable protein"
+    ],
+    "search_keywords": [
+      "vegetarian",
+      "chay",
+      "protein",
+      "processed",
+      "dry"
+    ],
+    "category": "vegetarian",
+    "subcategory": "protein",
+    "calories_kcal": 311,
+    "protein_g": 41.7,
+    "carbs_g": 34.7,
+    "fat_g": 3,
+    "fiber_g": 17.5,
+    "serving_size": 25,
+    "serving_unit": "g",
+    "preparation_method": "processed",
+    "raw_or_cooked": "dry",
+    "edible_portion": 1,
+    "data_source": "USDA FoodData Central – SR Legacy (SR28), NDB 16106 \"Meat extender\", giá trị/100 g. USDA ghi tên \"Meat extender\" (đạm đậu nành dạng sợi/miếng, khô). Sản phẩm Việt Nam khác nhau, xem nhãn bao bì.",
+    "verification_status": "VERIFIED",
+    "owner_id": null,
+    "created_at": "2026-11-27T00:00:00.000Z",
+    "updated_at": "2026-11-27T00:00:00.000Z",
+    "servings": [
+      {
+        "label_vi": "1 phần",
+        "label_en": "1 portion",
+        "grams": 25,
+        "is_default": true
+      }
+    ]
+  },
+  {
+    "food_id": "cha-lua-chay",
+    "food_name_vi": "Chả lụa chay",
+    "food_name_en": "Vegetarian sausage loaf (cha lua chay)",
+    "alternative_names": [
+      "giò chay",
+      "chả chay",
+      "vegetarian ham"
+    ],
+    "search_keywords": [
+      "vegetarian",
+      "chay",
+      "protein",
+      "processed",
+      "prepared"
+    ],
+    "category": "vegetarian",
+    "subcategory": "protein",
+    "calories_kcal": 189,
+    "protein_g": 17.8,
+    "carbs_g": 4.4,
+    "fat_g": 11.1,
+    "fiber_g": 1.1,
+    "serving_size": 50,
+    "serving_unit": "g",
+    "preparation_method": "processed",
+    "raw_or_cooked": "prepared",
+    "edible_portion": 1,
+    "data_source": "ƯỚC TÍNH – USDA FoodData Central – SR Legacy (SR28), NDB 43131 \"Luncheon slices, meatless\", giá trị/100 g. Không có bản ghi chả lụa chay. Dùng USDA 43131 \"Luncheon slices, meatless\" (chả lát chay) làm giá trị gần nhất. Chả chay Việt Nam thường nhiều tinh bột và ít đạm hơn: luôn ưu tiên nhãn bao bì.",
+    "verification_status": "ESTIMATED",
+    "owner_id": null,
+    "created_at": "2026-11-27T00:00:00.000Z",
+    "updated_at": "2026-11-27T00:00:00.000Z",
+    "servings": [
+      {
+        "label_vi": "1 lát dày",
+        "label_en": "1 thick slice",
+        "grams": 50,
+        "is_default": true
+      }
+    ]
+  },
+  {
+    "food_id": "mi-can",
+    "food_name_vi": "Mì căn (seitan) luộc",
+    "food_name_en": "Seitan (wheat gluten), simmered",
+    "alternative_names": [
+      "mì căn",
+      "mì cân",
+      "seitan",
+      "wheat meat"
+    ],
+    "search_keywords": [
+      "vegetarian",
+      "chay",
+      "protein",
+      "boiled",
+      "cooked"
+    ],
+    "category": "vegetarian",
+    "subcategory": "protein",
+    "calories_kcal": 122,
+    "protein_g": 24.8,
+    "carbs_g": 4.6,
+    "fat_g": 0.6,
+    "fiber_g": 0.2,
+    "serving_size": 100,
+    "serving_unit": "g",
+    "preparation_method": "boiled",
+    "raw_or_cooked": "cooked",
+    "edible_portion": 1,
+    "data_source": "ƯỚC TÍNH – tính từ công thức 1 phần 100 g: bột gluten lúa mì 33 g (USDA 48052) + nước 67 g (0 kcal). Tổng 1 phần: 122 kcal, 24.8 g đạm. Số liệu nguyên liệu: USDA FoodData Central – SR Legacy (SR28), theo mã NDB. Giả định mì căn chín gồm 1 phần bột gluten và 2 phần nước theo khối lượng; mì căn càng khô thì đạm/100 g càng cao. Thực tế thay đổi theo quán, khẩu phần và lượng dầu.",
+    "verification_status": "ESTIMATED",
+    "owner_id": null,
+    "created_at": "2026-11-27T00:00:00.000Z",
+    "updated_at": "2026-11-27T00:00:00.000Z",
+    "servings": [
+      {
+        "label_vi": "1 phần",
+        "label_en": "1 portion",
+        "grams": 100,
+        "is_default": true
+      }
+    ]
+  },
+  {
+    "food_id": "suon-non-chay-chien",
+    "food_name_vi": "Sườn non chay chiên",
+    "food_name_en": "Fried vegetarian \"ribs\" (soy protein)",
+    "alternative_names": [
+      "sườn chay",
+      "sườn non chay",
+      "soy ribs"
+    ],
+    "search_keywords": [
+      "vegetarian",
+      "chay",
+      "protein",
+      "fried",
+      "cooked"
+    ],
+    "category": "vegetarian",
+    "subcategory": "protein",
+    "calories_kcal": 164,
+    "protein_g": 12.8,
+    "carbs_g": 10.7,
+    "fat_g": 8.6,
+    "fiber_g": 5.4,
+    "serving_size": 65,
+    "serving_unit": "g",
+    "preparation_method": "fried",
+    "raw_or_cooked": "cooked",
+    "edible_portion": 1,
+    "data_source": "ƯỚC TÍNH – tính từ công thức 1 phần (2–3 miếng) 65 g: đạm đậu nành khô (TVP) 20 g (USDA 16106) + nước 40 g (0 kcal) + dầu ăn 5 g (USDA 04044). Tổng 1 phần (2–3 miếng): 106 kcal, 8.3 g đạm. Số liệu nguyên liệu: USDA FoodData Central – SR Legacy (SR28), theo mã NDB. 20 g sườn chay khô ngâm nở gấp 3 lần, chiên thấm khoảng 5 g dầu. Thực tế thay đổi theo quán, khẩu phần và lượng dầu.",
+    "verification_status": "ESTIMATED",
+    "owner_id": null,
+    "created_at": "2026-11-27T00:00:00.000Z",
+    "updated_at": "2026-11-27T00:00:00.000Z",
+    "servings": [
+      {
+        "label_vi": "1 phần (2–3 miếng)",
+        "label_en": "1 portion",
+        "grams": 65,
+        "is_default": true
+      }
+    ]
+  },
+  {
+    "food_id": "com-tam-chay",
+    "food_name_vi": "Cơm tấm chay (sườn non chay)",
+    "food_name_en": "Vegetarian broken rice with soy \"ribs\"",
+    "alternative_names": [
+      "cơm tấm chay",
+      "cơm sườn chay"
+    ],
+    "search_keywords": [
+      "vegetarian",
+      "chay",
+      "rice_dish",
+      "prepared",
+      "prepared"
+    ],
+    "category": "vegetarian",
+    "subcategory": "rice_dish",
+    "calories_kcal": 123,
+    "protein_g": 4.1,
+    "carbs_g": 21,
+    "fat_g": 2.5,
+    "fiber_g": 1.4,
+    "serving_size": 368,
+    "serving_unit": "g",
+    "preparation_method": "prepared",
+    "raw_or_cooked": "prepared",
+    "edible_portion": 1,
+    "data_source": "ƯỚC TÍNH – tính từ công thức 1 đĩa 368 g: cơm trắng 200 g (USDA 20045) + đạm đậu nành khô (TVP) 20 g (USDA 16106) + nước 55 g (0 kcal) + dầu ăn 8 g (USDA 04044) + hành lá 5 g (USDA 11291) + dưa leo 30 g (USDA 11205) + cà rốt 15 g (USDA 11124) + củ cải trắng 15 g (USDA 11430) + nước tương 10 g (USDA 16123) + đường 10 g (USDA 19335). Tổng 1 đĩa: 452 kcal, 15.1 g đạm. Số liệu nguyên liệu: USDA FoodData Central – SR Legacy (SR28), theo mã NDB. Gồm 200 g cơm, 2–3 miếng sườn chay (20 g khô), mỡ hành, đồ chua, dưa leo, nước tương pha đường. Không tính bì chay, chả chay (thêm riêng nếu có). Thực tế thay đổi theo quán, khẩu phần và lượng dầu.",
+    "verification_status": "ESTIMATED",
+    "owner_id": null,
+    "created_at": "2026-11-27T00:00:00.000Z",
+    "updated_at": "2026-11-27T00:00:00.000Z",
+    "servings": [
+      {
+        "label_vi": "1 đĩa",
+        "label_en": "1 plate",
+        "grams": 368,
+        "is_default": true
+      }
+    ]
+  },
+  {
+    "food_id": "pho-chay",
+    "food_name_vi": "Phở chay",
+    "food_name_en": "Vegetarian pho",
+    "alternative_names": [
+      "phở chay",
+      "phở nấm",
+      "phở đậu hũ"
+    ],
+    "search_keywords": [
+      "vegetarian",
+      "chay",
+      "noodle_soup",
+      "prepared",
+      "prepared"
+    ],
+    "category": "vegetarian",
+    "subcategory": "noodle_soup",
+    "calories_kcal": 54,
+    "protein_g": 2.2,
+    "carbs_g": 8.6,
+    "fat_g": 1.4,
+    "fiber_g": 1,
+    "serving_size": 771,
+    "serving_unit": "g",
+    "preparation_method": "prepared",
+    "raw_or_cooked": "prepared",
+    "edible_portion": 1,
+    "data_source": "ƯỚC TÍNH – tính từ công thức 1 tô 771 g: bún/bánh phở chín 200 g (USDA 20134) + đậu hũ chiên 50 g (USDA 16429) + nấm đông cô 30 g (USDA 11238) + nấm bào ngư 30 g (USDA 11987) + giá 30 g (USDA 11043) + hành tây 15 g (USDA 11282) + hành lá 5 g (USDA 11291) + rau thơm 3 g (USDA 11165) + cà rốt 20 g (USDA 11124) + củ cải trắng 30 g (USDA 11430) + nước tương 5 g (USDA 16123) + đường 3 g (USDA 19335) + nước 350 g (0 kcal). Tổng 1 tô: 416 kcal, 16.7 g đạm. Số liệu nguyên liệu: USDA FoodData Central – SR Legacy (SR28), theo mã NDB. Nước dùng rau củ không dầu. Quán cho nhiều đậu hũ hơn thì đạm tăng (mỗi 50 g đậu hũ chiên thêm ~9 g đạm, 135 kcal). Thực tế thay đổi theo quán, khẩu phần và lượng dầu.",
+    "verification_status": "ESTIMATED",
+    "owner_id": null,
+    "created_at": "2026-11-27T00:00:00.000Z",
+    "updated_at": "2026-11-27T00:00:00.000Z",
+    "servings": [
+      {
+        "label_vi": "1 tô",
+        "label_en": "1 bowl",
+        "grams": 771,
+        "is_default": true
+      }
+    ]
+  },
+  {
+    "food_id": "bun-rieu-chay",
+    "food_name_vi": "Bún riêu chay",
+    "food_name_en": "Vegetarian tomato noodle soup (bun rieu chay)",
+    "alternative_names": [
+      "bún riêu chay"
+    ],
+    "search_keywords": [
+      "vegetarian",
+      "chay",
+      "noodle_soup",
+      "prepared",
+      "prepared"
+    ],
+    "category": "vegetarian",
+    "subcategory": "noodle_soup",
+    "calories_kcal": 60,
+    "protein_g": 2.6,
+    "carbs_g": 7.8,
+    "fat_g": 2.3,
+    "fiber_g": 0.8,
+    "serving_size": 803,
+    "serving_unit": "g",
+    "preparation_method": "prepared",
+    "raw_or_cooked": "prepared",
+    "edible_portion": 1,
+    "data_source": "ƯỚC TÍNH – tính từ công thức 1 tô 803 g: bún/bánh phở chín 200 g (USDA 20134) + đậu hũ trắng 60 g (USDA 16427) + đậu hũ chiên 50 g (USDA 16429) + cà chua 80 g (USDA 11529) + nấm rơm 30 g (USDA 11989) + dầu ăn 5 g (USDA 04044) + giá 20 g (USDA 11043) + nước tương 5 g (USDA 16123) + đường 3 g (USDA 19335) + nước 350 g (0 kcal). Tổng 1 tô: 485 kcal, 20.7 g đạm. Số liệu nguyên liệu: USDA FoodData Central – SR Legacy (SR28), theo mã NDB. Riêu làm từ đậu hũ trắng tán, thêm đậu hũ chiên, cà chua xào dầu, nấm rơm. Thực tế thay đổi theo quán, khẩu phần và lượng dầu.",
+    "verification_status": "ESTIMATED",
+    "owner_id": null,
+    "created_at": "2026-11-27T00:00:00.000Z",
+    "updated_at": "2026-11-27T00:00:00.000Z",
+    "servings": [
+      {
+        "label_vi": "1 tô",
+        "label_en": "1 bowl",
+        "grams": 803,
+        "is_default": true
+      }
+    ]
+  },
+  {
+    "food_id": "banh-mi-chay",
+    "food_name_vi": "Bánh mì chay (chả lụa chay, pate nấm)",
+    "food_name_en": "Vegetarian banh mi",
+    "alternative_names": [
+      "bánh mì chay"
+    ],
+    "search_keywords": [
+      "vegetarian",
+      "chay",
+      "bread",
+      "prepared",
+      "prepared"
+    ],
+    "category": "vegetarian",
+    "subcategory": "bread",
+    "calories_kcal": 183,
+    "protein_g": 8.9,
+    "carbs_g": 23.2,
+    "fat_g": 6.3,
+    "fiber_g": 1.7,
+    "serving_size": 180,
+    "serving_unit": "g",
+    "preparation_method": "prepared",
+    "raw_or_cooked": "prepared",
+    "edible_portion": 1,
+    "data_source": "ƯỚC TÍNH – tính từ công thức 1 ổ 180 g: bánh mì 70 g (USDA 18029) + chả lụa chay (tính như chả chay đóng gói) 40 g (USDA 43131) + nấm bào ngư 20 g (USDA 11987) + dầu ăn 5 g (USDA 04044) + cà rốt 10 g (USDA 11124) + củ cải trắng 10 g (USDA 11430) + dưa leo 15 g (USDA 11205) + rau thơm 3 g (USDA 11165) + nước tương 5 g (USDA 16123) + ớt 2 g (USDA 11819). Tổng 1 ổ: 329 kcal, 16.1 g đạm. Số liệu nguyên liệu: USDA FoodData Central – SR Legacy (SR28), theo mã NDB. Pate nấm tính là 20 g nấm xay + 5 g dầu. Chả lụa chay tính theo chả chay đóng gói của USDA (xem món Chả lụa chay). Thực tế thay đổi theo quán, khẩu phần và lượng dầu.",
+    "verification_status": "ESTIMATED",
+    "owner_id": null,
+    "created_at": "2026-11-27T00:00:00.000Z",
+    "updated_at": "2026-11-27T00:00:00.000Z",
+    "servings": [
+      {
+        "label_vi": "1 ổ",
+        "label_en": "1 sandwich",
+        "grams": 180,
+        "is_default": true
+      }
+    ]
+  },
+  {
+    "food_id": "mi-xao-chay",
+    "food_name_vi": "Mì xào chay rau củ",
+    "food_name_en": "Vegetarian stir-fried noodles with vegetables",
+    "alternative_names": [
+      "mì xào chay",
+      "mì xào rau củ"
+    ],
+    "search_keywords": [
+      "vegetarian",
+      "chay",
+      "noodle_dry",
+      "stir_fried",
+      "prepared"
+    ],
+    "category": "vegetarian",
+    "subcategory": "noodle_dry",
+    "calories_kcal": 146,
+    "protein_g": 5.8,
+    "carbs_g": 19.6,
+    "fat_g": 5.3,
+    "fiber_g": 2.2,
+    "serving_size": 383,
+    "serving_unit": "g",
+    "preparation_method": "stir_fried",
+    "raw_or_cooked": "prepared",
+    "edible_portion": 1,
+    "data_source": "ƯỚC TÍNH – tính từ công thức 1 đĩa 383 g: mì sợi lúa mì chín (không trứng) 200 g (USDA 20121) + đậu hũ chiên 40 g (USDA 16429) + bắp cải 50 g (USDA 11109) + cà rốt 30 g (USDA 11124) + nấm bào ngư 40 g (USDA 11987) + tỏi 3 g (USDA 11215) + dầu ăn 10 g (USDA 04044) + nước tương 10 g (USDA 16123). Tổng 1 đĩa: 560 kcal, 22.4 g đạm. Số liệu nguyên liệu: USDA FoodData Central – SR Legacy (SR28), theo mã NDB. Dùng mì sợi lúa mì không trứng. Mì trứng không phải món thuần chay. Thực tế thay đổi theo quán, khẩu phần và lượng dầu.",
+    "verification_status": "ESTIMATED",
+    "owner_id": null,
+    "created_at": "2026-11-27T00:00:00.000Z",
+    "updated_at": "2026-11-27T00:00:00.000Z",
+    "servings": [
+      {
+        "label_vi": "1 đĩa",
+        "label_en": "1 plate",
+        "grams": 383,
+        "is_default": true
+      }
+    ]
+  },
+  {
+    "food_id": "com-chien-chay",
+    "food_name_vi": "Cơm chiên chay",
+    "food_name_en": "Vegetarian fried rice",
+    "alternative_names": [
+      "cơm chiên chay",
+      "cơm rang chay"
+    ],
+    "search_keywords": [
+      "vegetarian",
+      "chay",
+      "rice_dish",
+      "fried",
+      "prepared"
+    ],
+    "category": "vegetarian",
+    "subcategory": "rice_dish",
+    "calories_kcal": 160,
+    "protein_g": 4.9,
+    "carbs_g": 21.7,
+    "fat_g": 6.1,
+    "fiber_g": 1.3,
+    "serving_size": 293,
+    "serving_unit": "g",
+    "preparation_method": "fried",
+    "raw_or_cooked": "prepared",
+    "edible_portion": 1,
+    "data_source": "ƯỚC TÍNH – tính từ công thức 1 đĩa 293 g: cơm trắng 200 g (USDA 20045) + đậu hũ chiên 30 g (USDA 16429) + đậu nành Nhật (edamame) 20 g (USDA 11212) + cà rốt 20 g (USDA 11124) + hành lá 5 g (USDA 11291) + dầu ăn 10 g (USDA 04044) + nước tương 8 g (USDA 16123). Tổng 1 đĩa: 468 kcal, 14.3 g đạm. Số liệu nguyên liệu: USDA FoodData Central – SR Legacy (SR28), theo mã NDB. Thực tế thay đổi theo quán, khẩu phần và lượng dầu.",
+    "verification_status": "ESTIMATED",
+    "owner_id": null,
+    "created_at": "2026-11-27T00:00:00.000Z",
+    "updated_at": "2026-11-27T00:00:00.000Z",
+    "servings": [
+      {
+        "label_vi": "1 đĩa",
+        "label_en": "1 plate",
+        "grams": 293,
+        "is_default": true
+      }
+    ]
+  },
+  {
+    "food_id": "dau-hu-kho-nam",
+    "food_name_vi": "Đậu hũ kho nấm",
+    "food_name_en": "Tofu braised with mushrooms",
+    "alternative_names": [
+      "đậu kho nấm",
+      "đậu hũ kho"
+    ],
+    "search_keywords": [
+      "vegetarian",
+      "chay",
+      "tofu",
+      "braised",
+      "cooked"
+    ],
+    "category": "vegetarian",
+    "subcategory": "tofu",
+    "calories_kcal": 186,
+    "protein_g": 10.8,
+    "carbs_g": 9,
+    "fat_g": 13.4,
+    "fiber_g": 2.6,
+    "serving_size": 190,
+    "serving_unit": "g",
+    "preparation_method": "braised",
+    "raw_or_cooked": "cooked",
+    "edible_portion": 1,
+    "data_source": "ƯỚC TÍNH – tính từ công thức 1 phần 190 g: đậu hũ chiên 100 g (USDA 16429) + nấm đông cô 40 g (USDA 11238) + dầu ăn 5 g (USDA 04044) + nước tương 10 g (USDA 16123) + đường 5 g (USDA 19335) + nước 30 g (0 kcal). Tổng 1 phần: 352 kcal, 20.5 g đạm. Số liệu nguyên liệu: USDA FoodData Central – SR Legacy (SR28), theo mã NDB. Thực tế thay đổi theo quán, khẩu phần và lượng dầu.",
+    "verification_status": "ESTIMATED",
+    "owner_id": null,
+    "created_at": "2026-11-27T00:00:00.000Z",
+    "updated_at": "2026-11-27T00:00:00.000Z",
+    "servings": [
+      {
+        "label_vi": "1 phần",
+        "label_en": "1 portion",
+        "grams": 190,
+        "is_default": true
+      }
+    ]
+  },
+  {
+    "food_id": "mi-can-kho-sa",
+    "food_name_vi": "Mì căn kho sả ớt",
+    "food_name_en": "Seitan braised with lemongrass & chili",
+    "alternative_names": [
+      "mì căn kho",
+      "mì căn xào sả"
+    ],
+    "search_keywords": [
+      "vegetarian",
+      "chay",
+      "protein",
+      "braised",
+      "cooked"
+    ],
+    "category": "vegetarian",
+    "subcategory": "protein",
+    "calories_kcal": 166,
+    "protein_g": 20,
+    "carbs_g": 8.9,
+    "fat_g": 6,
+    "fiber_g": 0.2,
+    "serving_size": 129,
+    "serving_unit": "g",
+    "preparation_method": "braised",
+    "raw_or_cooked": "cooked",
+    "edible_portion": 1,
+    "data_source": "ƯỚC TÍNH – tính từ công thức 1 phần 129 g: bột gluten lúa mì 33 g (USDA 48052) + nước 67 g (0 kcal) + dầu ăn 7 g (USDA 04044) + nước tương 10 g (USDA 16123) + đường 5 g (USDA 19335) + sả 5 g (USDA 11972) + ớt 2 g (USDA 11819). Tổng 1 phần: 214 kcal, 25.7 g đạm. Số liệu nguyên liệu: USDA FoodData Central – SR Legacy (SR28), theo mã NDB. 100 g mì căn (1 phần bột gluten : 2 phần nước) kho với dầu, nước tương, đường, sả. Thực tế thay đổi theo quán, khẩu phần và lượng dầu.",
+    "verification_status": "ESTIMATED",
+    "owner_id": null,
+    "created_at": "2026-11-27T00:00:00.000Z",
+    "updated_at": "2026-11-27T00:00:00.000Z",
+    "servings": [
+      {
+        "label_vi": "1 phần",
+        "label_en": "1 portion",
+        "grams": 129,
+        "is_default": true
+      }
+    ]
+  },
+  {
+    "food_id": "tempeh-ap-chao",
+    "food_name_vi": "Tempeh áp chảo",
+    "food_name_en": "Pan-seared tempeh",
+    "alternative_names": [
+      "tempeh chiên",
+      "tempeh rán"
+    ],
+    "search_keywords": [
+      "vegetarian",
+      "chay",
+      "protein",
+      "pan_seared",
+      "cooked"
+    ],
+    "category": "vegetarian",
+    "subcategory": "protein",
+    "calories_kcal": 217,
+    "protein_g": 18.8,
+    "carbs_g": 7.2,
+    "fat_g": 14.4,
+    "fiber_g": 0,
+    "serving_size": 110,
+    "serving_unit": "g",
+    "preparation_method": "pan_seared",
+    "raw_or_cooked": "cooked",
+    "edible_portion": 1,
+    "data_source": "ƯỚC TÍNH – tính từ công thức 1 phần 110 g: tempeh 100 g (USDA 16114) + dầu ăn 5 g (USDA 04044) + nước tương 5 g (USDA 16123). Tổng 1 phần: 239 kcal, 20.7 g đạm. Số liệu nguyên liệu: USDA FoodData Central – SR Legacy (SR28), theo mã NDB. Thực tế thay đổi theo quán, khẩu phần và lượng dầu.",
+    "verification_status": "ESTIMATED",
+    "owner_id": null,
+    "created_at": "2026-11-27T00:00:00.000Z",
+    "updated_at": "2026-11-27T00:00:00.000Z",
+    "servings": [
+      {
+        "label_vi": "1 phần",
+        "label_en": "1 portion",
+        "grams": 110,
+        "is_default": true
+      }
+    ]
+  },
+  {
+    "food_id": "goi-cuon-chay",
+    "food_name_vi": "Gỏi cuốn chay (kèm tương đậu phộng)",
+    "food_name_en": "Vegetarian fresh spring roll with peanut-hoisin sauce",
+    "alternative_names": [
+      "gỏi cuốn chay",
+      "cuốn chay"
+    ],
+    "search_keywords": [
+      "vegetarian",
+      "chay",
+      "rolls",
+      "raw",
+      "prepared"
+    ],
+    "category": "vegetarian",
+    "subcategory": "rolls",
+    "calories_kcal": 173,
+    "protein_g": 6.7,
+    "carbs_g": 23.2,
+    "fat_g": 6.5,
+    "fiber_g": 2.5,
+    "serving_size": 93,
+    "serving_unit": "g",
+    "preparation_method": "raw",
+    "raw_or_cooked": "prepared",
+    "edible_portion": 1,
+    "data_source": "ƯỚC TÍNH – tính từ công thức 1 cuốn 93 g: bánh tráng (tính như bột gạo khô) 9 g (USDA 20061) + bún/bánh phở chín 30 g (USDA 20134) + đậu hũ chiên 20 g (USDA 16429) + xà lách 10 g (USDA 11251) + rau thơm 3 g (USDA 11165) + cà rốt 5 g (USDA 11124) + giá 5 g (USDA 11043) + tương đen (hoisin) 8 g (USDA 06175) + đậu phộng rang 3 g (USDA 16390). Tổng 1 cuốn: 160 kcal, 6.2 g đạm. Số liệu nguyên liệu: USDA FoodData Central – SR Legacy (SR28), theo mã NDB. Tính cho 1 cuốn. Bánh tráng 9 g khô tính như bột gạo trắng (USDA không có bánh tráng). Thực tế thay đổi theo quán, khẩu phần và lượng dầu.",
+    "verification_status": "ESTIMATED",
+    "owner_id": null,
+    "created_at": "2026-11-27T00:00:00.000Z",
+    "updated_at": "2026-11-27T00:00:00.000Z",
+    "servings": [
+      {
+        "label_vi": "1 cuốn",
+        "label_en": "1 roll",
+        "grams": 93,
+        "is_default": true
+      }
+    ]
+  },
+  {
+    "food_id": "canh-nam-dau-hu",
+    "food_name_vi": "Canh nấm đậu hũ",
+    "food_name_en": "Mushroom & tofu soup",
+    "alternative_names": [
+      "canh đậu hũ nấm",
+      "canh chay"
+    ],
+    "search_keywords": [
+      "vegetarian",
+      "chay",
+      "soup",
+      "boiled",
+      "prepared"
+    ],
+    "category": "vegetarian",
+    "subcategory": "soup",
+    "calories_kcal": 25,
+    "protein_g": 2.1,
+    "carbs_g": 1.6,
+    "fat_g": 1.4,
+    "fiber_g": 0.5,
+    "serving_size": 428,
+    "serving_unit": "g",
+    "preparation_method": "boiled",
+    "raw_or_cooked": "prepared",
+    "edible_portion": 1,
+    "data_source": "ƯỚC TÍNH – tính từ công thức 1 tô 428 g: đậu hũ trắng 80 g (USDA 16427) + nấm rơm 30 g (USDA 11989) + nấm kim châm 30 g (USDA 11950) + cà chua 30 g (USDA 11529) + hành lá 3 g (USDA 11291) + dầu ăn 2 g (USDA 04044) + nước tương 3 g (USDA 16123) + nước 250 g (0 kcal). Tổng 1 tô: 107 kcal, 9 g đạm. Số liệu nguyên liệu: USDA FoodData Central – SR Legacy (SR28), theo mã NDB. Thực tế thay đổi theo quán, khẩu phần và lượng dầu.",
+    "verification_status": "ESTIMATED",
+    "owner_id": null,
+    "created_at": "2026-11-27T00:00:00.000Z",
+    "updated_at": "2026-11-27T00:00:00.000Z",
+    "servings": [
+      {
+        "label_vi": "1 tô",
+        "label_en": "1 bowl",
+        "grams": 428,
+        "is_default": true
+      }
+    ]
+  },
+  {
+    "food_id": "canh-rau-cu-chay",
+    "food_name_vi": "Canh rau củ chay",
+    "food_name_en": "Vegetable soup",
+    "alternative_names": [
+      "canh rau củ",
+      "canh chay"
+    ],
+    "search_keywords": [
+      "vegetarian",
+      "chay",
+      "soup",
+      "boiled",
+      "prepared"
+    ],
+    "category": "vegetarian",
+    "subcategory": "soup",
+    "calories_kcal": 23,
+    "protein_g": 0.5,
+    "carbs_g": 4.3,
+    "fat_g": 0.5,
+    "fiber_g": 0.9,
+    "serving_size": 435,
+    "serving_unit": "g",
+    "preparation_method": "boiled",
+    "raw_or_cooked": "prepared",
+    "edible_portion": 1,
+    "data_source": "ƯỚC TÍNH – tính từ công thức 1 tô 435 g: cà rốt 40 g (USDA 11124) + khoai tây 50 g (USDA 11367) + bắp cải 50 g (USDA 11109) + củ cải trắng 40 g (USDA 11430) + dầu ăn 2 g (USDA 04044) + nước tương 3 g (USDA 16123) + nước 250 g (0 kcal). Tổng 1 tô: 98 kcal, 2.4 g đạm. Số liệu nguyên liệu: USDA FoodData Central – SR Legacy (SR28), theo mã NDB. Thực tế thay đổi theo quán, khẩu phần và lượng dầu.",
+    "verification_status": "ESTIMATED",
+    "owner_id": null,
+    "created_at": "2026-11-27T00:00:00.000Z",
+    "updated_at": "2026-11-27T00:00:00.000Z",
+    "servings": [
+      {
+        "label_vi": "1 tô",
+        "label_en": "1 bowl",
+        "grams": 435,
+        "is_default": true
+      }
+    ]
+  },
+  {
+    "food_id": "nam-xao-chay",
+    "food_name_vi": "Nấm xào chay",
+    "food_name_en": "Stir-fried mixed mushrooms",
+    "alternative_names": [
+      "nấm xào",
+      "nấm xào tỏi"
+    ],
+    "search_keywords": [
+      "vegetarian",
+      "chay",
+      "vegetable",
+      "stir_fried",
+      "cooked"
+    ],
+    "category": "vegetarian",
+    "subcategory": "vegetable",
+    "calories_kcal": 78,
+    "protein_g": 3,
+    "carbs_g": 6.7,
+    "fat_g": 5.2,
+    "fiber_g": 2.3,
+    "serving_size": 166,
+    "serving_unit": "g",
+    "preparation_method": "stir_fried",
+    "raw_or_cooked": "cooked",
+    "edible_portion": 1,
+    "data_source": "ƯỚC TÍNH – tính từ công thức 1 đĩa 166 g: nấm bào ngư 80 g (USDA 11987) + nấm đông cô 40 g (USDA 11238) + nấm kim châm 30 g (USDA 11950) + tỏi 3 g (USDA 11215) + dầu ăn 8 g (USDA 04044) + nước tương 5 g (USDA 16123). Tổng 1 đĩa: 129 kcal, 4.9 g đạm. Số liệu nguyên liệu: USDA FoodData Central – SR Legacy (SR28), theo mã NDB. Thực tế thay đổi theo quán, khẩu phần và lượng dầu.",
+    "verification_status": "ESTIMATED",
+    "owner_id": null,
+    "created_at": "2026-11-27T00:00:00.000Z",
+    "updated_at": "2026-11-27T00:00:00.000Z",
+    "servings": [
+      {
+        "label_vi": "1 đĩa",
+        "label_en": "1 plate",
+        "grams": 166,
+        "is_default": true
+      }
+    ]
+  },
+  {
+    "food_id": "ca-ri-chay",
+    "food_name_vi": "Cà ri chay",
+    "food_name_en": "Vegetarian coconut curry",
+    "alternative_names": [
+      "cà ri chay",
+      "curry chay"
+    ],
+    "search_keywords": [
+      "vegetarian",
+      "chay",
+      "curry",
+      "braised",
+      "prepared"
+    ],
+    "category": "vegetarian",
+    "subcategory": "curry",
+    "calories_kcal": 114,
+    "protein_g": 3.8,
+    "carbs_g": 9.8,
+    "fat_g": 7.3,
+    "fiber_g": 1.7,
+    "serving_size": 415,
+    "serving_unit": "g",
+    "preparation_method": "braised",
+    "raw_or_cooked": "prepared",
+    "edible_portion": 1,
+    "data_source": "ƯỚC TÍNH – tính từ công thức 1 tô 415 g: khoai tây 80 g (USDA 11367) + khoai lang 60 g (USDA 11508) + cà rốt 40 g (USDA 11124) + đậu hũ chiên 60 g (USDA 16429) + nước cốt dừa 60 g (USDA 12118) + sả 5 g (USDA 11972) + dầu ăn 5 g (USDA 04044) + nước tương 5 g (USDA 16123) + nước 100 g (0 kcal). Tổng 1 tô: 471 kcal, 15.9 g đạm. Số liệu nguyên liệu: USDA FoodData Central – SR Legacy (SR28), theo mã NDB. Không tính bánh mì hoặc bún ăn kèm. Thực tế thay đổi theo quán, khẩu phần và lượng dầu.",
+    "verification_status": "ESTIMATED",
+    "owner_id": null,
+    "created_at": "2026-11-27T00:00:00.000Z",
+    "updated_at": "2026-11-27T00:00:00.000Z",
+    "servings": [
+      {
+        "label_vi": "1 tô",
+        "label_en": "1 bowl",
+        "grams": 415,
+        "is_default": true
+      }
+    ]
+  },
+  {
+    "food_id": "sua-dau-nanh-hat-chia",
+    "food_name_vi": "Sữa đậu nành không đường + hạt chia",
+    "food_name_en": "Unsweetened soy milk with chia seeds",
+    "alternative_names": [
+      "sữa đậu chia"
+    ],
+    "search_keywords": [
+      "vegetarian",
+      "chay",
+      "drink",
+      "beverage",
+      "n/a"
+    ],
+    "category": "vegetarian",
+    "subcategory": "drink",
+    "calories_kcal": 50,
+    "protein_g": 3.4,
+    "carbs_g": 3.3,
+    "fat_g": 2.7,
+    "fiber_g": 1.8,
+    "serving_size": 260,
+    "serving_unit": "ml",
+    "preparation_method": "beverage",
+    "raw_or_cooked": "n/a",
+    "edible_portion": 1,
+    "data_source": "ƯỚC TÍNH – tính từ công thức 1 ly 260 g: sữa đậu nành không đường 250 g (USDA 16222) + hạt chia 10 g (USDA 12006). Tổng 1 ly: 131 kcal, 8.8 g đạm. Số liệu nguyên liệu: USDA FoodData Central – SR Legacy (SR28), theo mã NDB. Sữa đậu nành có bổ sung canxi, vitamin A, D (USDA 16222). Thực tế thay đổi theo quán, khẩu phần và lượng dầu.",
+    "verification_status": "ESTIMATED",
+    "owner_id": null,
+    "created_at": "2026-11-27T00:00:00.000Z",
+    "updated_at": "2026-11-27T00:00:00.000Z",
+    "servings": [
+      {
+        "label_vi": "1 ly",
+        "label_en": "1 glass",
+        "grams": 260,
         "is_default": true
       }
     ]
