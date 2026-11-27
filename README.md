@@ -23,6 +23,10 @@ React + TypeScript + Tailwind CSS + Recharts + Lucide on the frontend; Supabase 
 | Goals | Mifflin-St Jeor BMR, TDEE, and goal-based recommendations with capped deficits and a safe minimum (1200 kcal F / 1500 kcal M, never below BMR). Macros always add up (P×4 + C×4 + F×9 = kcal), with a one-click rebalance. Manual override, step goal, and a medical disclaimer. |
 | Reports | This week, this month or a custom range. Shows daily averages, days logged, goal completion % (calories within ±10 % and protein ≥ 90 %), and body changes. CSV export for the diary, daily summary and measurements. |
 | Admin | Protected by `app_admins` and RLS. Verification overview; add, edit and delete global foods; "mark verified" only with a source; review user-submitted foods and promote them; manage categories; CSV/JSON import with validation preview; CSV/JSON export. |
+| Alerts & reminders | Dashboard card with in-app alerts. **Nutrition:** calories >110 % of target, fat >115 %, carbs >120 %, and once the day is over (after 21:00 or a past day) calories <70 %, protein <80 % and fiber <70 %. **Body:** BMI outside the healthy band of the chosen standard (WHO or Asian), weight change faster than 1 % of body weight per week (compared over 7–35 days), visceral fat ≥10 or rising, body fat % up ≥1 point, SMM down ≥0.5 kg vs the previous measurement. **Reminders:** breakfast/lunch/dinner not logged by a set time, water behind schedule, InBody check-in due (default 30 days). Each group can be switched off and thresholds/times are set in Settings. Logic: `src/lib/calc/alerts.ts`. Sugar and sodium aren't in the food data, so there are no alerts for them. |
+| Water | Water card on the dashboard (+150/+250/+500 ml or any amount, undo), daily goal in Settings. Stored in `water_logs` (migration 0002). |
+| Installable app (PWA) | Web app manifest, icons (incl. maskable + Apple touch icon), full-screen standalone mode, app shortcuts, a service worker that caches the app shell so it opens offline (Supabase data is never cached), an install button (Chrome/Edge/Android) or iOS instructions, and an "update available" banner. |
+| Device notifications | Optional: due reminders are shown as system notifications through the service worker (each at most once a day; water at most once per interval). They're sent while the app is open or recently in the background. There's no push server, so a fully closed app gets its reminders the next time it opens. |
 | Demo mode | When Supabase env vars are missing, the app runs entirely in browser `localStorage`. A permanent banner says data is **not** saved on a server. The sample account `demo@nutritrack.vn` / `demo1234` has labelled sample data and demo admin rights. |
 
 ### Project layout
@@ -44,8 +48,9 @@ tests/               unit tests (vitest) + e2e workflow script (Playwright)
 
 1. Create a project at <https://supabase.com> (pick a region near Vietnam, e.g. Singapore).
 2. Open **SQL Editor** and run the whole of `supabase/migrations/0001_schema.sql`. It enables `pgcrypto`, `unaccent` and `pg_trgm`, then creates the 12 required tables plus `app_admins` and `profile_history`, along with the triggers and all RLS policies. You can safely run it again.
-3. In the same editor, run `supabase/seed.sql` to load the 15 categories, 503 foods and 519 serving sizes. This is also safe to run again.
-4. Make yourself an administrator after you've signed up in the app:
+3. Run `supabase/migrations/0002_alerts_water.sql` too (adds `user_settings.alert_prefs` and the `water_logs` table with RLS). Safe to run again. Without it, the app still works, but water tracking and saving alert settings show a "run migration 0002" message.
+4. In the same editor, run `supabase/seed.sql` to load the 15 categories, 503 foods and 519 serving sizes. This is also safe to run again.
+5. Make yourself an administrator after you've signed up in the app:
    ```sql
    insert into public.app_admins (user_id)
    select id from auth.users where email = 'you@example.com';
@@ -84,14 +89,18 @@ Without `.env.local` the app starts in demo mode.
 ## 5. Testing
 
 ```bash
-npm test                          # 44 unit tests: nutrient math, totals, serving conversions, recipes/yield,
-                                  # BMI + WHO/Asian classes, Mifflin-St Jeor, macro consistency, search, dates, reports, CSV
+npm test                          # 65 unit tests: nutrient math, totals, serving conversions, recipes/yield,
+                                  # BMI + WHO/Asian classes, Mifflin-St Jeor, macro consistency, search, dates, reports, CSV,
+                                  # health alerts & reminders (tests/alerts.test.ts)
 npm run typecheck
 npm run build && npx vite preview --port 4173 &
 node tests/e2e/workflows.mjs      # 42 browser checks (demo mode): registration, login/logout, profile, 4 meals,
                                   # exact kcal/macro totals, edit/delete, copy day, recipes, BMI, history, InBody compare,
                                   # chart range filtering, CSV export, user isolation, admin permissions, mobile layout
-supabase/tests/run_local.sh       # RLS tests on local PostgreSQL
+node tests/e2e/alerts-pwa.mjs     # 22 checks: manifest/icons, service worker, offline shell, alerts card, water,
+                                  # settings toggles, test + reminder notifications, mobile layout
+supabase/tests/run_local.sh       # RLS tests on local PostgreSQL (incl. water_logs)
+node scripts/generate-icons.mjs   # re-render the PWA icons in public/
 ```
 
 ## 6. Still needs external configuration

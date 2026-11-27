@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { LayoutDashboard, NotebookPen, Database, ChefHat, Ruler, LineChart, Target, User, Settings, Shield, LogOut, Menu, X, Leaf, AlertTriangle, FileBarChart } from 'lucide-react';
 import { useApp } from '@/context/AppContext';
 import { cx, Toasts } from './ui';
+import { PwaBanner, ReminderNotifier } from './PwaWidgets';
 import type { DictKey } from '@/i18n/dict';
 
 const NAV: { to: string; key: DictKey; icon: typeof LayoutDashboard; mobile?: boolean }[] = [
@@ -67,6 +68,8 @@ export default function Layout() {
   return (
     <div className="min-h-screen">
       <DemoBanner />
+      <PwaBanner />
+      <ReminderNotifier />
       <div className="lg:flex">
         {/* desktop sidebar */}
         <aside className="sticky top-0 hidden h-screen w-64 shrink-0 flex-col border-r border-ink-100 bg-white px-4 py-5 lg:flex">
@@ -100,7 +103,7 @@ export default function Layout() {
           </div>
         )}
 
-        <main className="min-w-0 flex-1 px-4 pb-24 pt-5 sm:px-6 lg:px-8 lg:pb-10 lg:pt-8" key={loc.pathname}>
+        <main className="min-w-0 flex-1 px-4 pb-[calc(6rem+env(safe-area-inset-bottom))] pt-5 sm:px-6 lg:px-8 lg:pb-10 lg:pt-8" key={loc.pathname}>
           <div className="mx-auto max-w-6xl"><Outlet /></div>
         </main>
       </div>
