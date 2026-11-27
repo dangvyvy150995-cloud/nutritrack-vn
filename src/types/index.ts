@@ -195,3 +195,36 @@ export interface WaterLog {
   amount_ml: number;
   created_at: string;
 }
+
+// ---------- PT (coach) mode – migration 0003 ----------
+export interface CoachProfile {
+  user_id: string;
+  display_name: string;
+  invite_code: string;
+  created_at: string;
+}
+
+/** The client's view of their PT. */
+export interface MyCoach {
+  coach_id: string;
+  display_name: string;
+  linked_at: string;
+}
+
+/** The PT's view of one linked client. */
+export interface CoachClientLink {
+  client_id: string;
+  linked_at: string;
+  full_name: string;
+  email: string;
+}
+
+/** Read-only data a PT can load for a linked client. */
+export interface ClientBundle {
+  profile: UserProfile;
+  settings: UserSettings | null;
+  goals: FitnessGoals | null;
+  diary: DiaryEntry[]; // only within the requested date range
+  measurements: BodyMeasurement[]; // all, oldest first
+  water: WaterLog[] | null; // null = water log unavailable (migration 0002 not run)
+}

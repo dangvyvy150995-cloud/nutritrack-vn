@@ -1,9 +1,10 @@
-import { NavLink, Outlet, useLocation } from 'react-router-dom';
-import { useState } from 'react';
-import { LayoutDashboard, NotebookPen, Database, ChefHat, Ruler, LineChart, Target, User, Settings, Shield, LogOut, Menu, X, Leaf, AlertTriangle, FileBarChart } from 'lucide-react';
+import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { LayoutDashboard, NotebookPen, Database, ChefHat, Ruler, LineChart, Target, User, Settings, Shield, Users, LogOut, Menu, X, Leaf, AlertTriangle, FileBarChart } from 'lucide-react';
 import { useApp } from '@/context/AppContext';
 import { cx, Toasts } from './ui';
 import { PwaBanner, ReminderNotifier } from './PwaWidgets';
+import { takePendingInvite } from './CoachWidgets';
 import type { DictKey } from '@/i18n/dict';
 
 const NAV: { to: string; key: DictKey; icon: typeof LayoutDashboard; mobile?: boolean }[] = [
@@ -52,10 +53,18 @@ export function Logo() {
 }
 
 export default function Layout() {
-  const { t, isAdmin, backend, profile } = useApp();
+  const { t, isAdmin, coach, backend, profile } = useApp();
   const [open, setOpen] = useState(false);
   const loc = useLocation();
-  const items = isAdmin ? [...NAV, { to: '/admin', key: 'nav_admin' as DictKey, icon: Shield }] : NAV;
+  const navigate = useNavigate();
+  // Resume a PT invite link opened before signing in.
+  useEffect(() => { const code = takePendingInvite(); if (code) navigate(`/join?code=${code}`, { replace: true }); // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  const items = [
+    ...NAV,
+    ...(coach ? [{ to: '/coach', key: 'nav_coach' as DictKey, icon: Users }] : []),
+    ...(isAdmin ? [{ to: '/admin', key: 'nav_admin' as DictKey, icon: Shield }] : []),
+  ];
 
   const link = (it: (typeof items)[number], onClick?: () => void) => (
     <NavLink key={it.to} to={it.to} end={it.to === '/'} onClick={onClick}

@@ -1,5 +1,5 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
-import type { FitnessGoals, FoodCategory, FoodItem, Language, Macros, UserProfile, UserSettings } from '@/types';
+import type { CoachProfile, FitnessGoals, FoodCategory, FoodItem, Language, Macros, UserProfile, UserSettings } from '@/types';
 import { backend, type AuthUser } from '@/lib/data';
 import { DICTS, type DictKey } from '@/i18n/dict';
 import { FoodSearchIndex } from '@/lib/calc/search';
@@ -15,6 +15,9 @@ interface Ctx {
   settings: UserSettings | null;
   goals: FitnessGoals | null;
   isAdmin: boolean;
+  /** Own PT profile when PT mode is on (null = off or migration 0003 not run). */
+  coach: CoachProfile | null;
+  setCoach: (c: CoachProfile | null) => void;
   lang: Language;
   tz: string;
   today: string;
@@ -54,6 +57,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [settings, setSettingsState] = useState<UserSettings | null>(null);
   const [goals, setGoals] = useState<FitnessGoals | null>(null);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [coach, setCoach] = useState<CoachProfile | null>(null);
   const [lang, setLangState] = useState<Language>(initialLang);
   const [foods, setFoods] = useState<FoodItem[]>([]);
   const [foodsLoading, setFoodsLoading] = useState(false);
@@ -91,8 +95,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const reloadUserData = useCallback(async () => {
-    const [p, s, g, a] = await Promise.all([backend.getProfile(), backend.getSettings(), backend.getGoals(), backend.isAdmin()]);
-    setProfile(p); setSettingsState(s); setGoals(g); setIsAdmin(a);
+    const [p, s, g, a, c] = await Promise.all([backend.getProfile(), backend.getSettings(), backend.getGoals(), backend.isAdmin(), backend.getCoachProfile().catch(() => null)]);
+    setProfile(p); setSettingsState(s); setGoals(g); setIsAdmin(a); setCoach(c);
     if (s.language && s.language !== lang) { setLangState(s.language); try { localStorage.setItem(LANG_KEY, s.language); } catch { /* ignore */ } }
   }, [lang]);
 
@@ -102,7 +106,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     const load = async (u: AuthUser | null) => {
       currentId = u?.id ?? null;
       setUser(u);
-      if (!u) { setProfile(null); setSettingsState(null); setGoals(null); setIsAdmin(false); setFoods([]); setReady(true); return; }
+      if (!u) { setProfile(null); setSettingsState(null); setGoals(null); setIsAdmin(false); setCoach(null); setFoods([]); setReady(true); return; }
       try {
         await reloadUserData();
         reloadFoods().catch((e) => toast(String(e.message ?? e), 'error'));
@@ -133,7 +137,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const goalMacros = goals ? { calories: goals.calories_kcal, protein: goals.protein_g, carbs: goals.carbs_g, fat: goals.fat_g, fiber: goals.fiber_g } : null;
 
   const value: Ctx = {
-    backend, ready, user, profile, settings, goals, isAdmin, lang, tz, today: todayIso(tz), t, setLang,
+    backend, ready, user, profile, settings, goals, isAdmin, coach, setCoach, lang, tz, today: todayIso(tz), t, setLang,
     foods, foodsLoading, foodIndex, foodById, categories, favorites, toggleFavorite, reloadFoods, reloadUserData,
     setProfile, setSettings: setSettingsState, setGoals, goalMacros, toasts, toast, dataVersion, bump: () => setDataVersion((v) => v + 1),
   };

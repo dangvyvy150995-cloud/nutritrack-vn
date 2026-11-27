@@ -3,6 +3,7 @@ import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { useApp } from '@/context/AppContext';
 import Layout from '@/components/Layout';
 import { Spinner, Toasts } from '@/components/ui';
+import { savePendingInvite } from '@/components/CoachWidgets';
 import { LoginPage, RegisterPage, ForgotPasswordPage, ResetPasswordPage } from '@/pages/Auth';
 
 const Dashboard = lazy(() => import('@/pages/Dashboard'));
@@ -16,12 +17,19 @@ const Goals = lazy(() => import('@/pages/Goals'));
 const Profile = lazy(() => import('@/pages/Profile'));
 const SettingsPage = lazy(() => import('@/pages/Settings'));
 const Admin = lazy(() => import('@/pages/admin/Admin'));
+const Coach = lazy(() => import('@/pages/coach/Coach'));
+const ClientDetail = lazy(() => import('@/pages/coach/ClientDetail'));
+const Join = lazy(() => import('@/pages/coach/Join'));
 
 function Protected({ children }: { children: ReactNode }) {
   const { ready, user } = useApp();
   const loc = useLocation();
   if (!ready) return <Spinner />;
-  if (!user) return <Navigate to="/login" replace state={{ from: loc.pathname }} />;
+  if (!user) {
+    // Keep a PT invite code across sign-in / sign-up; Layout resumes it afterwards.
+    if (loc.pathname === '/join') savePendingInvite(new URLSearchParams(loc.search).get('code'));
+    return <Navigate to="/login" replace state={{ from: loc.pathname }} />;
+  }
   return <>{children}</>;
 }
 
@@ -57,6 +65,9 @@ export default function App() {
           <Route path="goals" element={<Goals />} />
           <Route path="profile" element={<Profile />} />
           <Route path="settings" element={<SettingsPage />} />
+          <Route path="coach" element={<Coach />} />
+          <Route path="coach/clients/:id" element={<ClientDetail />} />
+          <Route path="join" element={<Join />} />
           <Route path="admin" element={<AdminOnly><Admin /></AdminOnly>} />
         </Route>
         <Route path="*" element={<Navigate to="/" replace />} />
