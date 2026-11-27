@@ -1,6 +1,6 @@
 import type {
   BodyMeasurement, DiaryEntry, FitnessGoals, FoodCategory, FoodItem, NewBodyMeasurement, Recipe, SavedMeal,
-  UserProfile, UserSettings,
+  UserProfile, UserSettings, WaterLog,
 } from '@/types';
 
 export interface AuthUser { id: string; email: string }
@@ -65,6 +65,11 @@ export interface Backend {
   addMeasurement(m: NewBodyMeasurement): Promise<BodyMeasurement>;
   updateMeasurement(id: string, m: NewBodyMeasurement): Promise<BodyMeasurement>;
   deleteMeasurement(id: string): Promise<void>;
+
+  // water (Supabase: needs migration 0002 – throws BackendError code 'migration_needed' otherwise)
+  listWater(start: string, end: string): Promise<WaterLog[]>;
+  addWater(date: string, ml: number): Promise<WaterLog>;
+  deleteWater(id: string): Promise<void>;
 
   // admin (enforced server-side by RLS in Supabase mode)
   adminListAllFoods(): Promise<FoodItem[]>;

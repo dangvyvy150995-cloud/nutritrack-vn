@@ -5,18 +5,26 @@ import { useApp } from '@/context/AppContext';
 import { Card, DateNav, fmt, PageHeader, ProgressBar, StatCard, Spinner } from '@/components/ui';
 import { FoodPicker, type PickedItem } from '@/components/FoodPicker';
 import { MeasurementModal } from './Body';
-import type { BodyMeasurement, DiaryEntry, MealType } from '@/types';
+import type { BodyMeasurement, DiaryEntry, MealType, WaterLog } from '@/types';
+import { AlertsCard, WaterCard, useAlertPrefs } from '@/components/HealthAlerts';
+import { computeAlerts, minutesInTz } from '@/lib/calc/alerts';
+import { useNow } from '@/lib/useNow';
 import { dailyTotals, remaining, totalsByMeal } from '@/lib/calc/nutrition';
 import { bmiCategory } from '@/lib/calc/body';
 import { formatDate } from '@/lib/calc/dates';
 
 export default function Dashboard() {
-  const { t, backend, today, goalMacros, profile, settings, lang, toast, dataVersion, bump } = useApp();
+  const { t, backend, today, tz, goalMacros, profile, settings, lang, toast, dataVersion, bump } = useApp();
+  const prefs = useAlertPrefs();
+  const now = useNow(60_000);
   const [date, setDate] = useState(today);
   const [entries, setEntries] = useState<DiaryEntry[] | null>(null);
   const [body, setBody] = useState<BodyMeasurement[]>([]);
   const [pick, setPick] = useState(false);
   const [measure, setMeasure] = useState(false);
+  const [water, setWater] = useState<WaterLog[] | null>(null);
+  const [waterMissing, setWaterMissing] = useState(false);
+  const [waterVersion, setWaterVersion] = useState(0);
 
   useEffect(() => {
     let alive = true;
@@ -26,6 +34,14 @@ export default function Dashboard() {
       .catch((e) => toast(e.message, 'error'));
     return () => { alive = false; };
   }, [backend, date, dataVersion, toast]);
+
+  useEffect(() => {
+    let alive = true;
+    backend.listWater(date, date)
+      .then((w) => { if (alive) { setWater(w); setWaterMissing(false); } })
+      .catch((e) => { if (!alive) return; if (e.code === 'migration_needed') setWaterMissing(true); else toast(e.message, 'error'); setWater(null); });
+    return () => { alive = false; };
+  }, [backend, date, dataVersion, waterVersion, toast]);
 
   const totals = useMemo(() => dailyTotals(entries ?? []), [entries]);
   const byMeal = useMemo(() => totalsByMeal(entries ?? []), [entries]);
@@ -37,6 +53,12 @@ export default function Dashboard() {
   const std = settings?.bmi_standard ?? 'who';
   const cat = latest ? bmiCategory(latest.bmi, std) : null;
   const rem = goalMacros ? remaining(goalMacros, totals) : null;
+  const waterMl = water ? water.reduce((sum, w) => sum + w.amount_ml, 0) : null;
+  const alerts = useMemo(() => entries == null ? null : computeAlerts({
+    date, today, nowMinutes: minutesInTz(now, tz), entries, goals: goalMacros, measurements: body,
+    bmiStandard: std, fitnessGoal: profile?.fitness_goal ?? null, waterMl, prefs,
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }), [entries, body, date, today, now, tz, JSON.stringify(goalMacros), std, profile?.fitness_goal, waterMl, JSON.stringify(prefs)]);
   const profileIncomplete = !profile?.gender || !profile?.date_of_birth || !profile?.height_cm;
 
   const add = async (it: PickedItem) => {
@@ -72,6 +94,11 @@ export default function Dashboard() {
         <StatCard icon={<Beef size={16} />} label={t('protein_intake')} value={fmt(totals.protein, 1)} unit="g" sub={goalMacros ? `${t('target')} ${fmt(goalMacros.protein)} g` : undefined} />
         <StatCard icon={<Flame size={16} />} label={t('remaining_kcal')} value={rem ? fmt(Math.abs(rem.calories)) : '—'} unit="kcal" sub={rem && rem.calories < 0 ? t('over') : rem ? t('remaining') : t('no_goals')} tone={rem && rem.calories < 0 ? 'accent' : 'brand'} />
         <StatCard icon={<Leaf size={16} />} label={t('fiber_intake')} value={fmt(totals.fiber, 1)} unit="g" sub={goalMacros ? `${t('target')} ${fmt(goalMacros.fiber)} g` : undefined} />
+      </div>
+
+      <div className="mt-5 grid gap-5 lg:grid-cols-5">
+        <AlertsCard alerts={alerts} className="lg:col-span-3" />
+        <WaterCard date={date} logs={water} unavailable={waterMissing} onChanged={() => setWaterVersion((v) => v + 1)} className="lg:col-span-2" />
       </div>
 
       <div className="mt-5 grid gap-5 lg:grid-cols-5">

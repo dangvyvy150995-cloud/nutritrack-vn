@@ -1,5 +1,5 @@
 import { createClient, type SupabaseClient } from '@supabase/supabase-js';
-import type { BodyMeasurement, DiaryEntry, FitnessGoals, FoodCategory, FoodItem, FoodServing, Macros, NewBodyMeasurement, Recipe, SavedMeal, UserProfile, UserSettings } from '@/types';
+import type { BodyMeasurement, DiaryEntry, FitnessGoals, FoodCategory, FoodItem, FoodServing, Macros, NewBodyMeasurement, Recipe, SavedMeal, UserProfile, UserSettings, WaterLog } from '@/types';
 import type { AuthUser, Backend, CustomFoodInput, NewDiaryEntry, RecipeInput } from './backend';
 import { BackendError } from './backend';
 
@@ -10,8 +10,15 @@ const n = (v: unknown) => (v == null ? null : Number(v));
 const per100From = (r: Row): Macros => ({ calories: Number(r.kcal_100), protein: Number(r.protein_100), carbs: Number(r.carbs_100), fat: Number(r.fat_100), fiber: Number(r.fiber_100 ?? 0) });
 const per100To = (m: Macros) => ({ kcal_100: m.calories, protein_100: m.protein, carbs_100: m.carbs, fat_100: m.fat, fiber_100: m.fiber });
 
+// PostgREST codes for "table/column not in schema cache" and Postgres "undefined table/column":
+// these mean a newer migration (e.g. 0002_alerts_water.sql) hasn't been run in Supabase yet.
+const MISSING_SCHEMA = new Set(['PGRST204', 'PGRST205', '42P01', '42703']);
+
 function check(res: { data: any; error: any }): any {
-  if (res.error) throw new BackendError(res.error.message, res.error.code);
+  if (res.error) {
+    if (MISSING_SCHEMA.has(res.error.code)) throw new BackendError(res.error.message, 'migration_needed');
+    throw new BackendError(res.error.message, res.error.code);
+  }
   return res.data;
 }
 
@@ -247,6 +254,17 @@ export class SupabaseBackend implements Backend {
     return mapBody(check(await this.sb.from('body_measurements').update(m).eq('id', id).select('*').single()));
   }
   async deleteMeasurement(id: string) { check(await this.sb.from('body_measurements').delete().eq('id', id)); }
+
+  async listWater(start: string, end: string) {
+    return (check(await this.sb.from('water_logs').select('*').gte('entry_date', start).lte('entry_date', end).order('created_at')) as Row[])
+      .map((r): WaterLog => ({ id: r.id, user_id: r.user_id, entry_date: r.entry_date, amount_ml: Number(r.amount_ml), created_at: r.created_at }));
+  }
+  async addWater(date: string, ml: number) {
+    const id = await this.uid();
+    const r = check(await this.sb.from('water_logs').insert({ user_id: id, entry_date: date, amount_ml: Math.round(ml) }).select('*').single()) as Row;
+    return { id: r.id, user_id: r.user_id, entry_date: r.entry_date, amount_ml: Number(r.amount_ml), created_at: r.created_at };
+  }
+  async deleteWater(id: string) { check(await this.sb.from('water_logs').delete().eq('id', id)); }
 
   async adminListAllFoods() {
     const out: FoodItem[] = [];

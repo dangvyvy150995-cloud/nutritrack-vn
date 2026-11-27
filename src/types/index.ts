@@ -44,6 +44,8 @@ export interface UserSettings {
   language: Language;
   bmi_standard: BmiStandard;
   timezone: string;
+  /** Alert & reminder preferences (migration 0002). Partial/absent on older rows: use normalizeAlertPrefs(). */
+  alert_prefs?: object | null;
 }
 
 export interface FitnessGoals {
@@ -185,3 +187,11 @@ export interface BodyMeasurement {
 }
 
 export type NewBodyMeasurement = Omit<BodyMeasurement, 'id' | 'user_id' | 'bmi' | 'created_at' | 'updated_at'>;
+
+export interface WaterLog {
+  id: string;
+  user_id: string;
+  entry_date: string; // YYYY-MM-DD
+  amount_ml: number;
+  created_at: string;
+}

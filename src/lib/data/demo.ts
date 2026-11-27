@@ -1,4 +1,4 @@
-import type { BodyMeasurement, DiaryEntry, FitnessGoals, FoodCategory, FoodItem, Recipe, SavedMeal, UserProfile, UserSettings } from '@/types';
+import type { BodyMeasurement, DiaryEntry, FitnessGoals, FoodCategory, FoodItem, Recipe, SavedMeal, UserProfile, UserSettings, WaterLog } from '@/types';
 import type { AuthUser, Backend, CustomFoodInput, NewDiaryEntry, RecipeInput } from './backend';
 import { BackendError } from './backend';
 import { calcBmi } from '@/lib/calc/body';
@@ -17,6 +17,7 @@ interface DemoUser { id: string; email: string; pwHash: string; admin: boolean; 
 interface UserData {
   profile: UserProfile; settings: UserSettings; goals: FitnessGoals | null; diary: DiaryEntry[]; meals: SavedMeal[];
   recipes: Recipe[]; body: BodyMeasurement[]; favorites: string[]; customFoods: FoodItem[];
+  water?: WaterLog[]; // added later: absent in older demo data
 }
 interface DB { users: DemoUser[]; session: string | null; data: Record<string, UserData>; globalOverrides: Record<string, FoodItem | null>; categories: FoodCategory[] | null }
 
@@ -205,6 +206,19 @@ export class DemoBackend implements Backend {
     this.save(); return data.body[i];
   }
   async deleteMeasurement(id: string) { const { data } = this.me(); data.body = data.body.filter((b) => b.id !== id); this.save(); }
+
+  async listWater(start: string, end: string) {
+    return (this.me().data.water ?? []).filter((w) => w.entry_date >= start && w.entry_date <= end).map((w) => ({ ...w }));
+  }
+  async addWater(date: string, ml: number) {
+    const { user, data } = this.me();
+    if (!(ml > 0 && ml <= 5000)) throw new BackendError('Invalid amount', 'range');
+    const w: WaterLog = { id: uid(), user_id: user.id, entry_date: date, amount_ml: Math.round(ml), created_at: now() };
+    (data.water ??= []).push(w);
+    this.save();
+    return { ...w };
+  }
+  async deleteWater(id: string) { const { data } = this.me(); data.water = (data.water ?? []).filter((w) => w.id !== id); this.save(); }
 
   private requireAdmin() { if (!this.me().user.admin) throw new BackendError('Administrator access required', 'forbidden'); }
   async adminListAllFoods() { this.requireAdmin(); return this.globalFoods(); }
