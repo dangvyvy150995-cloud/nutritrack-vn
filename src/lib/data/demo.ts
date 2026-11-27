@@ -1,4 +1,4 @@
-import type { BodyMeasurement, DiaryEntry, FitnessGoals, FoodCategory, FoodItem, Recipe, SavedMeal, UserProfile, UserSettings, WaterLog } from '@/types';
+import type { BodyMeasurement, ClientBundle, CoachClientLink, CoachProfile, MyCoach, DiaryEntry, FitnessGoals, FoodCategory, FoodItem, Recipe, SavedMeal, UserProfile, UserSettings, WaterLog } from '@/types';
 import type { AuthUser, Backend, CustomFoodInput, NewDiaryEntry, RecipeInput } from './backend';
 import { BackendError } from './backend';
 import { calcBmi } from '@/lib/calc/body';
@@ -19,7 +19,11 @@ interface UserData {
   recipes: Recipe[]; body: BodyMeasurement[]; favorites: string[]; customFoods: FoodItem[];
   water?: WaterLog[]; // added later: absent in older demo data
 }
-interface DB { users: DemoUser[]; session: string | null; data: Record<string, UserData>; globalOverrides: Record<string, FoodItem | null>; categories: FoodCategory[] | null }
+interface CoachLink { coach_id: string; client_id: string; created_at: string }
+interface DB {
+  users: DemoUser[]; session: string | null; data: Record<string, UserData>; globalOverrides: Record<string, FoodItem | null>; categories: FoodCategory[] | null;
+  coaches?: Record<string, CoachProfile>; coachLinks?: CoachLink[]; // PT mode: added later, absent in older demo data
+}
 
 export const DEMO_ACCOUNT = { email: 'demo@nutritrack.vn', password: 'demo1234' };
 
@@ -219,6 +223,108 @@ export class DemoBackend implements Backend {
     return { ...w };
   }
   async deleteWater(id: string) { const { data } = this.me(); data.water = (data.water ?? []).filter((w) => w.id !== id); this.save(); }
+
+  // ---------- PT (coach) mode: same rules as the SQL functions in migration 0003 ----------
+  private coachState() {
+    const db = this.load();
+    db.coaches ??= {};
+    db.coachLinks ??= [];
+    return { db, coaches: db.coaches, links: db.coachLinks };
+  }
+  private newInviteCode(): string {
+    const alphabet = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+    const { coaches } = this.coachState();
+    for (;;) {
+      const buf = crypto.getRandomValues(new Uint8Array(6));
+      const code = Array.from(buf, (b) => alphabet[b % alphabet.length]).join('');
+      if (!Object.values(coaches).some((c) => c.invite_code === code)) return code;
+    }
+  }
+  async getCoachProfile() { const { user } = this.me(); const c = this.coachState().coaches[user.id]; return c ? { ...c } : null; }
+  async becomeCoach(displayName: string) {
+    const { user } = this.me();
+    const name = displayName.trim();
+    if (!name || name.length > 80) throw new BackendError('Invalid name', 'range');
+    const { coaches } = this.coachState();
+    coaches[user.id] = coaches[user.id] ? { ...coaches[user.id], display_name: name } : { user_id: user.id, display_name: name, invite_code: this.newInviteCode(), created_at: now() };
+    this.save(); return { ...coaches[user.id] };
+  }
+  async regenerateInviteCode() {
+    const { user } = this.me();
+    const { coaches } = this.coachState();
+    if (!coaches[user.id]) throw new BackendError('not_a_coach', 'not_a_coach');
+    coaches[user.id] = { ...coaches[user.id], invite_code: this.newInviteCode() };
+    this.save(); return { ...coaches[user.id] };
+  }
+  async stopCoaching() {
+    const { user } = this.me();
+    const st = this.coachState();
+    delete st.coaches[user.id];
+    st.db.coachLinks = st.links.filter((l) => l.coach_id !== user.id);
+    this.save();
+  }
+  private coachByCode(code: string) {
+    const c = code.trim().toUpperCase();
+    return Object.values(this.coachState().coaches).find((x) => x.invite_code === c) ?? null;
+  }
+  async lookupCoach(code: string) {
+    const { user } = this.me();
+    const c = this.coachByCode(code);
+    return c && c.user_id !== user.id ? c.display_name : null;
+  }
+  async joinCoach(code: string) {
+    const { user } = this.me();
+    const c = this.coachByCode(code);
+    if (!c) throw new BackendError('invalid_code', 'invalid_code');
+    if (c.user_id === user.id) throw new BackendError('own_code', 'own_code');
+    const { links } = this.coachState();
+    const mine = links.find((l) => l.client_id === user.id);
+    if (mine?.coach_id === c.user_id) return;
+    if (mine) throw new BackendError('already_linked', 'already_linked');
+    links.push({ coach_id: c.user_id, client_id: user.id, created_at: now() });
+    this.save();
+  }
+  async getMyCoach(): Promise<MyCoach | null> {
+    const { user } = this.me();
+    const { coaches, links } = this.coachState();
+    const l = links.find((x) => x.client_id === user.id);
+    const c = l && coaches[l.coach_id];
+    return l && c ? { coach_id: l.coach_id, display_name: c.display_name, linked_at: l.created_at } : null;
+  }
+  async leaveCoach() {
+    const { user } = this.me();
+    const st = this.coachState();
+    st.db.coachLinks = st.links.filter((l) => l.client_id !== user.id);
+    this.save();
+  }
+  async coachListClients(): Promise<CoachClientLink[]> {
+    const { user } = this.me();
+    const { db, links } = this.coachState();
+    return links.filter((l) => l.coach_id === user.id).map((l) => {
+      const p = db.data[l.client_id]?.profile;
+      return { client_id: l.client_id, linked_at: l.created_at, full_name: p?.full_name ?? '', email: p?.email ?? '' };
+    });
+  }
+  async coachRemoveClient(clientId: string) {
+    const { user } = this.me();
+    const st = this.coachState();
+    st.db.coachLinks = st.links.filter((l) => !(l.coach_id === user.id && l.client_id === clientId));
+    this.save();
+  }
+  async coachGetClients(ids: string[], start: string, end: string): Promise<ClientBundle[]> {
+    const { user } = this.me();
+    const { db, links } = this.coachState();
+    const mine = new Set(links.filter((l) => l.coach_id === user.id).map((l) => l.client_id));
+    return ids.filter((id) => mine.has(id) && db.data[id]).map((id) => {
+      const d = structuredClone(db.data[id]);
+      return {
+        profile: d.profile, settings: d.settings, goals: d.goals,
+        diary: d.diary.filter((e) => e.entry_date >= start && e.entry_date <= end),
+        measurements: [...d.body].sort((a, b) => a.measured_on.localeCompare(b.measured_on)),
+        water: (d.water ?? []).filter((w) => w.entry_date >= start && w.entry_date <= end),
+      };
+    });
+  }
 
   private requireAdmin() { if (!this.me().user.admin) throw new BackendError('Administrator access required', 'forbidden'); }
   async adminListAllFoods() { this.requireAdmin(); return this.globalFoods(); }

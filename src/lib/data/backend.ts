@@ -1,5 +1,5 @@
 import type {
-  BodyMeasurement, DiaryEntry, FitnessGoals, FoodCategory, FoodItem, NewBodyMeasurement, Recipe, SavedMeal,
+  BodyMeasurement, ClientBundle, CoachClientLink, CoachProfile, MyCoach, DiaryEntry, FitnessGoals, FoodCategory, FoodItem, NewBodyMeasurement, Recipe, SavedMeal,
   UserProfile, UserSettings, WaterLog,
 } from '@/types';
 
@@ -71,6 +71,21 @@ export interface Backend {
   addWater(date: string, ml: number): Promise<WaterLog>;
   deleteWater(id: string): Promise<void>;
 
+  // PT (coach) mode – Supabase: needs migration 0003, throws BackendError 'migration_needed' otherwise.
+  // Error codes: 'invalid_code', 'own_code', 'already_linked', 'not_a_coach'.
+  getCoachProfile(): Promise<CoachProfile | null>; // null = PT mode off
+  becomeCoach(displayName: string): Promise<CoachProfile>;
+  regenerateInviteCode(): Promise<CoachProfile>;
+  stopCoaching(): Promise<void>;
+  lookupCoach(code: string): Promise<string | null>; // PT display name, or null if the code is unknown
+  joinCoach(code: string): Promise<void>;
+  getMyCoach(): Promise<MyCoach | null>;
+  leaveCoach(): Promise<void>;
+  coachListClients(): Promise<CoachClientLink[]>;
+  coachRemoveClient(clientId: string): Promise<void>;
+  /** Read-only data of linked clients. Diary/water limited to [start, end]. */
+  coachGetClients(clientIds: string[], start: string, end: string): Promise<ClientBundle[]>;
+
   // admin (enforced server-side by RLS in Supabase mode)
   adminListAllFoods(): Promise<FoodItem[]>;
   adminUpsertFoods(foods: FoodItem[]): Promise<number>;
@@ -78,6 +93,8 @@ export interface Backend {
   adminDeleteFood(foodId: string): Promise<void>;
   adminUpsertCategory(c: FoodCategory): Promise<void>;
 }
+
+export const COACH_ERRORS = ['invalid_code', 'own_code', 'already_linked', 'not_a_coach'] as const;
 
 export class BackendError extends Error {
   constructor(message: string, public code?: string) { super(message); }

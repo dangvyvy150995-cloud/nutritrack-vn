@@ -7,6 +7,7 @@ import type { DictKey } from '@/i18n/dict';
 import { normalizeAlertPrefs, type AlertPrefs, type ReminderMeal } from '@/lib/calc/alerts';
 import { BackendError } from '@/lib/data/backend';
 import { useInstallState } from '@/components/PwaWidgets';
+import { MyCoachCard } from '@/components/CoachWidgets';
 import { notificationSupport, promptInstall, requestNotificationPermission, showDeviceNotification, type NotifSupport } from '@/lib/pwa';
 
 const TZS = ['Asia/Ho_Chi_Minh', 'Asia/Bangkok', 'Asia/Singapore', 'Asia/Tokyo', 'Australia/Sydney', 'Europe/London', 'Europe/Paris', 'America/New_York', 'America/Los_Angeles', 'UTC'];
@@ -39,6 +40,7 @@ export default function Settings() {
             {backend.mode === 'supabase' ? t('storage_supabase') : t('storage_demo')}
           </p>
         </Card>
+        <MyCoachCard />
         <AlertSettings save={save} />
         <div className="space-y-5">
           <NotificationSettings save={save} />

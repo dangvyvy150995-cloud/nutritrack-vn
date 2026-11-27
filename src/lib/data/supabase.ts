@@ -1,7 +1,7 @@
 import { createClient, type SupabaseClient } from '@supabase/supabase-js';
-import type { BodyMeasurement, DiaryEntry, FitnessGoals, FoodCategory, FoodItem, FoodServing, Macros, NewBodyMeasurement, Recipe, SavedMeal, UserProfile, UserSettings, WaterLog } from '@/types';
+import type { BodyMeasurement, ClientBundle, CoachClientLink, CoachProfile, MyCoach, DiaryEntry, FitnessGoals, FoodCategory, FoodItem, FoodServing, Macros, NewBodyMeasurement, Recipe, SavedMeal, UserProfile, UserSettings, WaterLog } from '@/types';
 import type { AuthUser, Backend, CustomFoodInput, NewDiaryEntry, RecipeInput } from './backend';
-import { BackendError } from './backend';
+import { BackendError, COACH_ERRORS } from './backend';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 type Row = Record<string, any>;
@@ -14,9 +14,15 @@ const per100To = (m: Macros) => ({ kcal_100: m.calories, protein_100: m.protein,
 // these mean a newer migration (e.g. 0002_alerts_water.sql) hasn't been run in Supabase yet.
 const MISSING_SCHEMA = new Set(['PGRST204', 'PGRST205', '42P01', '42703']);
 
+// PostgREST "function not found" (PGRST202) also means migration 0003 isn't run yet.
+MISSING_SCHEMA.add('PGRST202');
+MISSING_SCHEMA.add('42883');
+
 function check(res: { data: any; error: any }): any {
   if (res.error) {
     if (MISSING_SCHEMA.has(res.error.code)) throw new BackendError(res.error.message, 'migration_needed');
+    const known = (COACH_ERRORS as readonly string[]).find((c) => res.error.message === c);
+    if (known) throw new BackendError(known, known);
     throw new BackendError(res.error.message, res.error.code);
   }
   return res.data;
@@ -200,7 +206,8 @@ export class SupabaseBackend implements Backend {
   }
 
   async listDiary(start: string | null, end: string) {
-    let q = this.sb.from('food_diary_entries').select('*').lte('entry_date', end).order('created_at');
+    // Always filter by user: a PT can also read linked clients' rows through RLS.
+    let q = this.sb.from('food_diary_entries').select('*').eq('user_id', await this.uid()).lte('entry_date', end).order('created_at');
     if (start) q = q.gte('entry_date', start);
     const rows: Row[] = [];
     for (let from = 0; ; from += 1000) {
@@ -244,7 +251,7 @@ export class SupabaseBackend implements Backend {
   async deleteRecipe(id: string) { check(await this.sb.from('recipes').delete().eq('id', id)); }
 
   async listMeasurements() {
-    return (check(await this.sb.from('body_measurements').select('*').order('measured_on').order('created_at')) as Row[]).map(mapBody);
+    return (check(await this.sb.from('body_measurements').select('*').eq('user_id', await this.uid()).order('measured_on').order('created_at')) as Row[]).map(mapBody);
   }
   async addMeasurement(m: NewBodyMeasurement) {
     const id = await this.uid();
@@ -256,7 +263,7 @@ export class SupabaseBackend implements Backend {
   async deleteMeasurement(id: string) { check(await this.sb.from('body_measurements').delete().eq('id', id)); }
 
   async listWater(start: string, end: string) {
-    return (check(await this.sb.from('water_logs').select('*').gte('entry_date', start).lte('entry_date', end).order('created_at')) as Row[])
+    return (check(await this.sb.from('water_logs').select('*').eq('user_id', await this.uid()).gte('entry_date', start).lte('entry_date', end).order('created_at')) as Row[])
       .map((r): WaterLog => ({ id: r.id, user_id: r.user_id, entry_date: r.entry_date, amount_ml: Number(r.amount_ml), created_at: r.created_at }));
   }
   async addWater(date: string, ml: number) {
@@ -265,6 +272,69 @@ export class SupabaseBackend implements Backend {
     return { id: r.id, user_id: r.user_id, entry_date: r.entry_date, amount_ml: Number(r.amount_ml), created_at: r.created_at };
   }
   async deleteWater(id: string) { check(await this.sb.from('water_logs').delete().eq('id', id)); }
+
+  // ---------- PT (coach) mode ----------
+  async getCoachProfile() {
+    const id = await this.uid();
+    return (check(await this.sb.from('coaches').select('*').eq('user_id', id).maybeSingle()) as CoachProfile | null) ?? null;
+  }
+  async becomeCoach(displayName: string) { return check(await this.sb.rpc('become_coach', { p_display_name: displayName })) as CoachProfile; }
+  async regenerateInviteCode() { return check(await this.sb.rpc('regenerate_invite_code')) as CoachProfile; }
+  async stopCoaching() { check(await this.sb.rpc('stop_coaching')); }
+  async lookupCoach(code: string) {
+    const rows = check(await this.sb.rpc('lookup_coach', { p_code: code })) as Row[];
+    return rows?.[0]?.display_name ?? null;
+  }
+  async joinCoach(code: string) { check(await this.sb.rpc('join_coach', { p_code: code })); }
+  async getMyCoach() {
+    const rows = check(await this.sb.rpc('my_coach')) as Row[];
+    const r = rows?.[0];
+    return r ? ({ coach_id: r.coach_id, display_name: r.display_name, linked_at: r.linked_at } as MyCoach) : null;
+  }
+  async leaveCoach() { check(await this.sb.rpc('leave_coach')); }
+  async coachListClients(): Promise<CoachClientLink[]> {
+    const id = await this.uid();
+    const links = check(await this.sb.from('coach_clients').select('client_id, created_at').eq('coach_id', id).order('created_at')) as Row[];
+    if (!links.length) return [];
+    const profiles = check(await this.sb.from('user_profiles').select('id, full_name, email').in('id', links.map((l) => l.client_id))) as Row[];
+    const byId = new Map(profiles.map((p) => [p.id, p]));
+    return links.map((l) => ({ client_id: l.client_id, linked_at: l.created_at, full_name: byId.get(l.client_id)?.full_name ?? '', email: byId.get(l.client_id)?.email ?? '' }));
+  }
+  async coachRemoveClient(clientId: string) { check(await this.sb.rpc('remove_client', { p_client: clientId })); }
+  async coachGetClients(ids: string[], start: string, end: string): Promise<ClientBundle[]> {
+    if (!ids.length) return [];
+    const all = async (q: () => any) => {
+      const out: Row[] = [];
+      for (let from = 0; ; from += 1000) {
+        const page = check(await q().range(from, from + 999)) as Row[];
+        out.push(...page);
+        if (page.length < 1000) break;
+      }
+      return out;
+    };
+    const [profiles, settings, goals, diary, body] = await Promise.all([
+      this.sb.from('user_profiles').select('*').in('id', ids).then(check) as Promise<Row[]>,
+      this.sb.from('user_settings').select('*').in('user_id', ids).then(check) as Promise<Row[]>,
+      this.sb.from('fitness_goals').select('*').in('user_id', ids).then(check) as Promise<Row[]>,
+      all(() => this.sb.from('food_diary_entries').select('*').in('user_id', ids).gte('entry_date', start).lte('entry_date', end).order('created_at')),
+      all(() => this.sb.from('body_measurements').select('*').in('user_id', ids).order('measured_on').order('created_at')),
+    ]);
+    let water: Row[] | null = null;
+    try {
+      water = await all(() => this.sb.from('water_logs').select('*').in('user_id', ids).gte('entry_date', start).lte('entry_date', end).order('created_at'));
+    } catch (e) { if (!(e instanceof BackendError && e.code === 'migration_needed')) throw e; }
+    return profiles.map((p): ClientBundle => {
+      const g = goals.find((x) => x.user_id === p.id);
+      return {
+        profile: this.mapProfile(p),
+        settings: (settings.find((x) => x.user_id === p.id) as UserSettings) ?? null,
+        goals: g ? ({ ...g, target_weight_kg: n(g.target_weight_kg), target_body_fat_pct: n(g.target_body_fat_pct), target_smm_kg: n(g.target_smm_kg) } as FitnessGoals) : null,
+        diary: diary.filter((d) => d.user_id === p.id).map(mapDiary),
+        measurements: body.filter((b) => b.user_id === p.id).map(mapBody),
+        water: water ? water.filter((w) => w.user_id === p.id).map((r): WaterLog => ({ id: r.id, user_id: r.user_id, entry_date: r.entry_date, amount_ml: Number(r.amount_ml), created_at: r.created_at })) : null,
+      };
+    });
+  }
 
   async adminListAllFoods() {
     const out: FoodItem[] = [];
